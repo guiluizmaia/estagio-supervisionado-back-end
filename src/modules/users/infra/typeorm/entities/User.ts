@@ -1,15 +1,20 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Clients } from "src/modules/clients/infra/typeorm/entities/Clients";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Permission } from "./Permission";
 
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn("uuid")
     id: string;
-    @ManyToOne((type) => Permission, permission => permission.users)
+    @ManyToOne((type) => Permission, permission => permission.users, {
+        eager: true
+    })
     @JoinColumn({name: "permissionId"})
-    permission: Promise<Permission>;
+    permission: Permission;
     @Column()
     permissionId: string;
+    @OneToMany((type) => Clients, user => User)
+    clients: Promise<Clients[]>;
     @Column()
     name: string;
     @Column()

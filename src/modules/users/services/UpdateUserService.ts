@@ -26,7 +26,7 @@ class UpdateUserService {
       if (!userUpdater) 
         throw new AppError('User not found!', 404);
 
-      if((await userUpdater.permission).permission !== 'ADMIN')
+      if(userUpdater.permission.permission !== 'ADMIN')
         throw new AppError('User not have permission ADMIN!', 402);
 
     }
@@ -35,7 +35,7 @@ class UpdateUserService {
       throw new AppError('User not found!', 404);
     }
 
-    if((await user.permission).permission !== 'ADMIN')
+    if(user.permission.permission !== 'ADMIN')
       throw new AppError('User not have permission ADMIN!', 402);
 
     Object.assign(user, userUpdated);

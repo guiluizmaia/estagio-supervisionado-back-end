@@ -58,7 +58,7 @@ class AuthenticateService {
         id,
         name,
         email: userEmail,
-        permissionName: (await permission).permission
+        permissionName: permission.permission
       },
     };
 

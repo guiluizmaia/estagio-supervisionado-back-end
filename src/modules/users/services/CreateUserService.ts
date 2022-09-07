@@ -24,7 +24,7 @@ class CreateUserService {
       throw new AppError('User not found!', 404);
     }
 
-    if((await userCreater.permission).permission !== 'ADMIN')
+    if(userCreater.permission.permission !== 'ADMIN')
       throw new AppError('User not have permission ADMIN!', 402);
 
     const user = await this.userRepository.findByEmail(email);

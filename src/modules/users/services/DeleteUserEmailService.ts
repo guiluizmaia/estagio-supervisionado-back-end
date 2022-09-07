@@ -20,7 +20,7 @@ class DeleteUserEmailService {
     if (!user) 
       throw new AppError('User not found!', 404);
 
-    if((await user.permission).permission !== 'ADMIN')
+    if(user.permission.permission !== 'ADMIN')
       throw new AppError('User not have permission ADMIN!', 402);
 
     await this.userRepository.delete(id);

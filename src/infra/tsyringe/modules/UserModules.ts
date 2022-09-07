@@ -5,7 +5,7 @@ import IPermissionsRepository from 'src/modules/users/repositories/IPermissionsR
 import IUserRepository from 'src/modules/users/repositories/IUserRepository';
 import { DependencyContainer } from 'tsyringe';
 
-class ClientsModules {
+class UserModules {
   static Configure(container: DependencyContainer): void {
     container
       .registerSingleton<IUserRepository>(
@@ -15,4 +15,4 @@ class ClientsModules {
   }
 }
 
-export default ClientsModules;
+export default UserModules;

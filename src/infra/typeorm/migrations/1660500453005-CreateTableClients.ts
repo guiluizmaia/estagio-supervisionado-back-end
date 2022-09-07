@@ -25,16 +25,25 @@ export class CreateTableClients1660500453005 implements MigrationInterface {
                             type: 'varchar(100)',
                         },
                         {
-                            name: 'RG',
+                            name: 'rg',
                             type: 'varchar(12)',
                         },
                         {
-                            name: 'CPF',
+                            name: 'cpf',
                             type: 'varchar(11)',
                         },
                         {
                             name: 'active',
                             type: 'boolean',
+                        },
+                        {
+                            name: 'userId',
+                            type: 'uuid',
+                        },
+                        {
+                            name: 'initDate',
+                            type: 'timestamp',
+                            default: 'now()',
                         },
                         {
                             name: 'created_at',
