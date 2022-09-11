@@ -22,6 +22,7 @@ class UserController {
   public async update(request: Request, response: Response): Promise<Response> {
     const user = request.body;
     const { email: emailUpdater } = request.user;
+    const { id } = request.query;
 
     const userUpdated = await container
       .resolve(UpdateUserService)
@@ -32,10 +33,13 @@ class UserController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { email } = request.user;
+    let { page } = request.query;
+
+    if(isNaN(Number(page))) page = '0'
 
     const users = await container
       .resolve(IndexUsersService)
-      .execute({ email });
+      .execute({ email, page: Number(page) });
 
     return response.status(200).json(users);
   }

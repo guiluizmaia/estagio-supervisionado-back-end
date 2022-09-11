@@ -3,6 +3,7 @@ import { Phones } from 'src/modules/commonData/infra/typeorm/entities/Phones';
 import { Clients } from '../infra/typeorm/entities/Clients';
 
 export interface ClientsDtos {
+    id?: string;
     name: string;
     rg: string;
     cpf: string;
@@ -18,8 +19,9 @@ interface IClientsRepository {
   findByCpf(cpf: String): Promise<Clients | undefined>;
   create(client: ClientsDtos): Promise<Clients>;
   save(client: Clients): Promise<Clients>;
-  index(): Promise<Clients[]>;
+  index(skip?: number, take?: number): Promise<Clients[]>;
   delete(id: string): Promise<void>;
+  count(): Promise<number>;
 }
 
 export default IClientsRepository;

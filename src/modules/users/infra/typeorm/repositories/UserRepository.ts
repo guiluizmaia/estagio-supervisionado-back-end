@@ -8,6 +8,15 @@ export class UserRepository implements IUserRepository {
     constructor(){
         this.repository = getRepository(User);
     }
+
+    async count(): Promise<number> {
+        return this.repository.count();
+    }
+    
+    async findById(id: String): Promise<User | undefined> {
+        return this.repository.findOne({where: {id}});
+    }
+
     async delete(id: string): Promise<void> {
         await this.repository.delete(id);
     }
@@ -21,8 +30,11 @@ export class UserRepository implements IUserRepository {
         return this.repository.save(user)
     }
     
-    async index(): Promise<User[]> {
-        return this.repository.find()
+    async index(skip: number = 0, take: number = 10): Promise<User[]> {
+        return this.repository.find({
+            skip,
+            take
+        })
     }
 
     async findByEmail(email: String): Promise<User | undefined> {

@@ -8,6 +8,11 @@ export class ClientsRepository implements IClientsRepository{
     constructor(){
         this.repository = getRepository(Clients);
     }
+
+    async count(): Promise<number> {
+        return this.repository.count();
+    }
+    
     async findByCpf(cpf: String): Promise<Clients | undefined> {
         return this.repository.findOne({where: {cpf}});
     }
@@ -25,8 +30,11 @@ export class ClientsRepository implements IClientsRepository{
         return this.repository.save(client)
     }
     
-    async index(): Promise<Clients[]> {
-        return this.repository.find()
+    async index(skip: number = 0, take: number = 10): Promise<Clients[]> {
+        return this.repository.find({
+            skip,
+            take
+        })
     }
     
     async delete(id: string): Promise<void> {

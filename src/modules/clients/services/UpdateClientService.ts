@@ -21,15 +21,32 @@ class UpdateClientService {
     private userRepository: IUserRepository,
   ) {}
 
-  public async execute({ emailCreater, ...data }: IRequest): Promise<Clients> {
+  public async execute({ emailCreater, id, ...data }: IRequest): Promise<Clients> {
     const userCreater = await this.userRepository.findByEmail(emailCreater);
 
     if (!userCreater) {
       throw new AppError('User not found!', 404);
     }
 
-    const client = await this.clientsRepository.findByCpf(data.cpf);
+    if(!id){
+      const client = await this.clientsRepository.findByCpf(data.cpf);
 
+      if (!client) {
+        throw new AppError('Client not found!', 401);
+      }
+
+      if(userCreater.permission.permission !== 'ADMIN'){
+        if(userCreater.id !== client.userId)
+         throw new AppError('User not have permission!', 402);
+      }
+
+      Object.assign(client, data);
+
+      return this.clientsRepository.save(client)
+    }
+
+    const client = await this.clientsRepository.findById(id);
+      
     if (!client) {
       throw new AppError('Client not found!', 401);
     }
@@ -38,10 +55,11 @@ class UpdateClientService {
       if(userCreater.id !== client.userId)
        throw new AppError('User not have permission!', 402);
     }
-
+  
     Object.assign(client, data);
-
+  
     return this.clientsRepository.save(client)
+    
   }
 }
 

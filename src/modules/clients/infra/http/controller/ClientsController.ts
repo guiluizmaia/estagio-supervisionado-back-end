@@ -18,20 +18,24 @@ class ClientsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, rg, cpf, phones, addresses, active } = request.body;
+    const { name, rg, cpf, phones, addresses, active, id } = request.body;
     const { email: emailCreater } = request.user;
 
     const user = await container
       .resolve(UpdateClientService)
-      .execute({ name, rg, cpf, phones, addresses, emailCreater, active });
+      .execute({ id, name, rg, cpf, phones, addresses, emailCreater, active });
 
     return response.status(200).json(user);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    let { page } = request.query;
+
+    if(isNaN(Number(page))) page = '0'
+    
     const users = await container
       .resolve(IndexClientsService)
-      .execute();
+      .execute({page: Number(page)});
 
     return response.status(200).json(users);
   }

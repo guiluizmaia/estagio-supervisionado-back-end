@@ -9,9 +9,11 @@ export interface UserDtos {
 
 interface IUserRepository {
   findByEmail(email: String): Promise<User | undefined>;
+  findById(id: String): Promise<User | undefined>;
   create(user: UserDtos): Promise<User>;
   save(user: User): Promise<User>;
-  index(): Promise<User[]>;
+  index(skip?: number, take?: number): Promise<User[]>;
+  count(): Promise<number>;
   delete(id: string): Promise<void>;
 }
 

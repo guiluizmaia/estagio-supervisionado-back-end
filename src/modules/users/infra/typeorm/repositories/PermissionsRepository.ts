@@ -8,6 +8,10 @@ export class PermissionsRepository implements IPermissionsRepository {
     constructor(){
         this.repository = getRepository(Permission);
     }
+    async findById(id: string): Promise<Permission | undefined> {
+        return this.repository.findOne(id)
+    }
+
     async index(): Promise<Permission[]> {
         return this.repository.find()
     }
