@@ -23,7 +23,8 @@ class DeleteUserEmailService {
     if(user.permission.permission !== 'ADMIN')
       throw new AppError('User not have permission ADMIN!', 402);
 
-    await this.userRepository.delete(id);
+    if(user.email !== 'admin@admin.com')
+      await this.userRepository.delete(id);
   }
 }
 

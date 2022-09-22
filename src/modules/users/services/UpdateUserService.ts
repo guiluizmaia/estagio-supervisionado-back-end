@@ -56,7 +56,8 @@ class UpdateUserService {
         user.password = await this.cryptHash.create(password);
       }
 
-      return this.userRepository.save(user);
+      if(user.email !== 'admin@admin.com')
+        return this.userRepository.save(user);
     } else {
       const user = await this.userRepository.findById(id);
 
@@ -80,7 +81,8 @@ class UpdateUserService {
         user.password = await this.cryptHash.create(password);
       }
 
-      return this.userRepository.save(user);
+      if(user.email !== 'admin@admin.com')
+        return this.userRepository.save(user);
     }
   }
 }

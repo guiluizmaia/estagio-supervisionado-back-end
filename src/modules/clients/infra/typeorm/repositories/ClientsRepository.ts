@@ -1,5 +1,5 @@
 import IClientsRepository, { ClientsDtos } from "src/modules/clients/repositories/IClientsRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, ILike, Repository } from "typeorm";
 import { Clients } from "../entities/Clients";
 
 export class ClientsRepository implements IClientsRepository{
@@ -12,6 +12,11 @@ export class ClientsRepository implements IClientsRepository{
     async count(): Promise<number> {
         return this.repository.count();
     }
+
+    async countSearch(name: string): Promise<number> {
+        return this.repository.count({where: {name: ILike(`%${name}%`)}});
+    }
+    
     
     async findByCpf(cpf: String): Promise<Clients | undefined> {
         return this.repository.findOne({where: {cpf}});
@@ -37,6 +42,14 @@ export class ClientsRepository implements IClientsRepository{
         })
     }
     
+    async search(name: string, skip: number = 0, take: number = 10): Promise<Clients[]> {
+        return this.repository.find({
+            where: {name: ILike(`%${name}%`)},
+            skip,
+            take
+        })
+    }
+
     async delete(id: string): Promise<void> {
         await this.repository.delete(id)
     }

@@ -1,4 +1,6 @@
 import { Clients } from "src/modules/clients/infra/typeorm/entities/Clients";
+import { Product } from "src/modules/products/infra/typeorm/entities/Product";
+import { Provider } from "src/modules/providers/infra/typeorm/entities/Provider";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Permission } from "./Permission";
 
@@ -21,6 +23,10 @@ export class User {
     email: string;
     @Column()
     password: string;
+    @OneToMany((type) => Provider, user => User)
+    providers: Promise<Provider[]>;
+    @OneToMany((type) => Product, user => User)
+    products: Promise<Product[]>;
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

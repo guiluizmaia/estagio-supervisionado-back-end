@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import CreateClientService from 'src/modules/clients/services/CreateClientService';
 import FindByCpfClientsService from 'src/modules/clients/services/FindByCpfClientsService';
+import IndexAndSearchClientsService from 'src/modules/clients/services/IndexAndSearchClientsService';
 import IndexClientsService from 'src/modules/clients/services/IndexClientsService';
 import UpdateClientService from 'src/modules/clients/services/UpdateClientService';
 import { container } from 'tsyringe';
@@ -29,13 +30,21 @@ class ClientsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    let { page } = request.query;
+    let { page, search } = request.query;
 
     if(isNaN(Number(page))) page = '0'
     
+    if(!search){
+      const users = await container
+        .resolve(IndexClientsService)
+        .execute({page: Number(page)});
+
+      return response.status(200).json(users);
+    }
+
     const users = await container
-      .resolve(IndexClientsService)
-      .execute({page: Number(page)});
+      .resolve(IndexAndSearchClientsService)
+      .execute({page: Number(page), search: String(search)});
 
     return response.status(200).json(users);
   }
