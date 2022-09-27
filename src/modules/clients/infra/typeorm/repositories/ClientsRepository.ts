@@ -10,16 +10,16 @@ export class ClientsRepository implements IClientsRepository{
     }
 
     async count(): Promise<number> {
-        return this.repository.count();
+        return this.repository.count({where: {exclude: false}});
     }
 
     async countSearch(name: string): Promise<number> {
-        return this.repository.count({where: {name: ILike(`%${name}%`)}});
+        return this.repository.count({where: {name: ILike(`%${name}%`), exclude: false}});
     }
     
     
     async findByCpf(cpf: String): Promise<Clients | undefined> {
-        return this.repository.findOne({where: {cpf}});
+        return this.repository.findOne({where: {cpf, exclude: false}});
     }
     
     async findById(id: String): Promise<Clients | undefined> {
@@ -38,13 +38,14 @@ export class ClientsRepository implements IClientsRepository{
     async index(skip: number = 0, take: number = 10): Promise<Clients[]> {
         return this.repository.find({
             skip,
-            take
+            take,
+            where: {exclude: false}
         })
     }
     
     async search(name: string, skip: number = 0, take: number = 10): Promise<Clients[]> {
         return this.repository.find({
-            where: {name: ILike(`%${name}%`)},
+            where: {name: ILike(`%${name}%`), exclude: false},
             skip,
             take
         })

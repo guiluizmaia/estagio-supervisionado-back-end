@@ -25,6 +25,8 @@ interface IProductRepository {
   index(skip?: number, take?: number): Promise<Product[]>;
   count(): Promise<number>;
   delete(id: string): Promise<void>;
+  countSearch(name: string): Promise<number>
+  search(name: string, skip?: number, take?: number): Promise<Product[]>;
 }
 
 export default IProductRepository;

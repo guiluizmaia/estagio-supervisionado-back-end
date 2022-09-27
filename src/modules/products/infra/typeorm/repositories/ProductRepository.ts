@@ -1,5 +1,5 @@
 import IProductRepository, { ProductDtos, ProductHistoricDtos } from "src/modules/products/repositories/IProductRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, ILike } from "typeorm";
 import { Product } from "../entities/Product";
 import { ProductHistoric } from "../entities/ProductHistoric";
 
@@ -10,6 +10,17 @@ export class ProductRepository implements IProductRepository{
 
     constructor(){
         this.repository = getRepository(Product);
+    }
+    async countSearch(name: string): Promise<number> {
+        return this.repository.count({where: {name: ILike(`%${name}%`)}});
+    }
+
+    async search(name: string, skip?: number | undefined, take?: number | undefined): Promise<Product[]> {
+        return this.repository.find({
+            where: {name: ILike(`%${name}%`)},
+            skip,
+            take
+        })
     }
     
     async createHistoric(historic: ProductHistoricDtos): Promise<ProductHistoric> {

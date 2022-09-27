@@ -35,13 +35,13 @@ class AuthenticateService {
     const { secretKey, expiresIn, token_validator } = auth;
 
     if (!user) {
-      throw new AppError('Email or password not correct!', 401);
+      throw new AppError('Email ou senha incorretos!', 401);
     }
 
     const passwordMatch = await this.cryptHash.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Email or password not correct!', 401);
+      throw new AppError('Email ou senha incorretos!', 401);
     }
 
     const token = sign({}, secretKey, {

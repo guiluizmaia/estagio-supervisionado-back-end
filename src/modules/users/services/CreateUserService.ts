@@ -36,9 +36,9 @@ class CreateUserService {
     const passwordHashed = await this.cryptHash.create(password);
 
     return this.userRepository.create({
-      email,
+      email: email.trim(),
       password: passwordHashed,
-      name,
+      name: name.trim(),
       permissionId
     })
   }

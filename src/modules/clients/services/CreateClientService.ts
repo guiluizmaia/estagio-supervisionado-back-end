@@ -34,14 +34,15 @@ class CreateClientService {
     }
 
     return this.clientsRepository.create({
-        name,
-        rg,
-        cpf,
+        name: name.trim(),
+        rg: rg.trim(),
+        cpf: cpf.trim(),
         phones,
         addresses,
         userId: userCreater.id,
         initDate: new Date(),
-        active: true
+        active: true,
+        exclude: false
     })
   }
 }

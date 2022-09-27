@@ -16,6 +16,8 @@ export class Clients {
     @Column()
     active: boolean;
     @Column()
+    exclude: boolean;
+    @Column()
     initDate: Date;
     @Column()
     userId: string;

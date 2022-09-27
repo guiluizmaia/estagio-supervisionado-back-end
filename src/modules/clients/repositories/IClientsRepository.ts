@@ -12,6 +12,7 @@ export interface ClientsDtos {
     phones?: Phones[];
     addresses?: Addresses[];
     active?: boolean;
+    exclude?: boolean;
 }
 
 interface IClientsRepository {

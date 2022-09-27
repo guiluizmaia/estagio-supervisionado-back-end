@@ -37,6 +37,10 @@ export class CreateTableClients1660500453005 implements MigrationInterface {
                             type: 'boolean',
                         },
                         {
+                            name: 'exclude',
+                            type: 'boolean',
+                        },
+                        {
                             name: 'userId',
                             type: 'uuid',
                         },
