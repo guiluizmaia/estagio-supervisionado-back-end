@@ -11,12 +11,14 @@ export interface ProviderDtos {
 
 interface IProviderRepository {
   findByEmail(email: String): Promise<Provider | undefined>;
+  search(name: string, skip?: number | undefined, take?: number | undefined): Promise<Provider[]>;
   findByCnpj(cnpj: String): Promise<Provider | undefined>;
   findById(id: String): Promise<Provider | undefined>;
   create(provider: ProviderDtos): Promise<Provider>;
   save(provider: Provider): Promise<Provider>;
   index(skip?: number, take?: number): Promise<Provider[]>;
   count(): Promise<number>;
+  countSearch(name: string): Promise<number>;
   delete(id: string): Promise<void>;
 }
 

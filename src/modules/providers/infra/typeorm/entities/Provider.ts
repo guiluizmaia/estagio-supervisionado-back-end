@@ -20,7 +20,9 @@ export class Provider {
     @Column()
     obs: string;
     @Column()
-    email: string;
+    email: string;    
+    @Column()
+    exclude: boolean;
     @OneToMany((type) => Product, provider => Provider)
     products: Promise<Product[]>;
     @CreateDateColumn()

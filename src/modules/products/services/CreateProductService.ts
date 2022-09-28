@@ -1,3 +1,4 @@
+import AppError from "src/infra/http/errors/AppError";
 import IProviderRepository from "src/modules/providers/repositories/IProviderRepository";
 import IUserRepository from "src/modules/users/repositories/IUserRepository";
 import { inject, injectable } from "tsyringe";
@@ -18,21 +19,16 @@ class CreateProductService {
       ) {}
 
     public async execute(data: IRequest): Promise<Product>{
-        const provider = await this.providerRepository.findByEmail('test@test.com')
+        const provider = await this.providerRepository.findById(data.providerId)
 
-        if(!provider){
-            const user = await this.userRepository.findByEmail("admin@admin.com")
-            const provider = await this.providerRepository.create({
-                name: 'test',
-                cnpj: '111111111',
-                obs: 'provider of test',
-                email: 'test@test.com',
-                userId: user!.id
-            })
-            data.providerId = provider.id;
-        } else {
-            data.providerId = provider.id;
-        }
+        if(!provider) throw new AppError("Provider not found", 404)
+
+        const user = await this.userRepository.findById(data.userId)
+
+        if(!user) throw new AppError("User not found", 404)
+
+        data.providerId = provider.id;
+        data.userId = user.id
 
         return this.productRepository.create(data);
     }

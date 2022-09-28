@@ -10,11 +10,11 @@ import { container } from 'tsyringe';
 class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {
     const data = request.body;
-    const { email: emailCreater } = request.user;
+    const { id } = request.user;
 
     const created = await container
       .resolve(CreateProductService)
-      .execute(data);
+      .execute({...data, userId: id});
 
     return response.status(201).json(created);
   }

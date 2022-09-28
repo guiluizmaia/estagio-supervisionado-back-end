@@ -1,5 +1,5 @@
 import IProviderRepository, { ProviderDtos } from "src/modules/providers/repositories/IProviderRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, ILike } from "typeorm";
 import { Provider } from "../entities/Provider";
 
 export class ProviderRepository implements IProviderRepository {
@@ -9,16 +9,28 @@ export class ProviderRepository implements IProviderRepository {
         this.repository = getRepository(Provider);
     }
 
+    async countSearch(name: string): Promise<number> {
+        return this.repository.count({where: {name: ILike(`%${name}%`), exclude: false}});
+    }
+
+    async search(name: string, skip?: number | undefined, take?: number | undefined): Promise<Provider[]> {
+        return this.repository.find({
+            where: {name: ILike(`%${name}%`), exclude: false},
+            skip,
+            take
+        })
+    }
+
     async findByEmail(email: String): Promise<Provider | undefined> {
-        return this.repository.findOne({where: { email }})        
+        return this.repository.findOne({where: { email, exclude: false }})        
     }
 
     async findByCnpj(cnpj: String): Promise<Provider | undefined> {
-        return this.repository.findOne({where: { cnpj }})        
+        return this.repository.findOne({where: { cnpj, exclude: false }})        
     }
 
     async findById(id: String): Promise<Provider | undefined> {
-        return this.repository.findOne({where: {id}});
+        return this.repository.findOne({where: {id, exclude: false}});
     }
 
     async create(provider: ProviderDtos): Promise<Provider> {
@@ -33,12 +45,13 @@ export class ProviderRepository implements IProviderRepository {
     async index(skip: number = 0, take: number = 10): Promise<Provider[]> {
         return this.repository.find({
             skip,
-            take
+            take,
+            where: {exclude: false}
         })
     }
 
     async count(): Promise<number> {
-        return this.repository.count();
+        return this.repository.count({where: {exclude: false}});
     }
 
     async delete(id: string): Promise<void> {

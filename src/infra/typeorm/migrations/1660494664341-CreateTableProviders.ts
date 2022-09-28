@@ -41,6 +41,10 @@ export class CreateTableProviders1660494664341 implements MigrationInterface {
                             type: 'varchar(50)',
                         },
                         {
+                            name: 'exclude',
+                            type: 'boolean',
+                        },
+                        {
                             name: 'created_at',
                             type: 'timestamp',
                             default: 'now()',
