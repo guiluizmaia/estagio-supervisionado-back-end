@@ -4,6 +4,7 @@ import DeleteProductService from 'src/modules/products/services/DeleteProductSer
 import FindByIdProductService from 'src/modules/products/services/FindByIdProductService';
 import IndexAndSearchProductService from 'src/modules/products/services/IndexAndSearchProductService';
 import IndexProductService from 'src/modules/products/services/IndexProductService';
+import InputProductService from 'src/modules/products/services/InputProductService';
 import UpdateProductService from 'src/modules/products/services/UpdateProductService';
 import { container } from 'tsyringe';
 
@@ -22,11 +23,11 @@ class ProductController {
   public async update(request: Request, response: Response): Promise<Response> {
     const data = request.body;
 
-    const user = await container
+    const product = await container
       .resolve(UpdateProductService)
       .execute(data);
 
-    return response.status(200).json(user);
+    return response.status(200).json(product);
   }
 
   public async findById(request: Request, response: Response): Promise<Response> {
@@ -67,6 +68,16 @@ class ProductController {
       .execute({page: Number(page), search: String(search)});
 
     return response.status(200).json(products);
+  }
+
+  public async input(request: Request, response: Response): Promise<Response> {
+    const data = request.body;
+
+    const product = await container
+      .resolve(InputProductService)
+      .execute(data);
+
+    return response.status(200).json(product);
   }
 
 }

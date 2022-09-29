@@ -19,14 +19,6 @@ class UpdateProductService {
 
         Object.assign(product, data)
 
-        if(data.qntd && data.qntd > product.qntd) await this.productRepository.createHistoric({
-            type: "ADD",
-            qntd: data.qntd,
-            paidPrice: data.paidPrice,
-            productId: data.id
-
-        })
-
         return this.productRepository.save(product);
     }
 }

@@ -14,6 +14,8 @@ export class ProductHistoric {
     type: string;
     @Column()
     qntd: number;
+    @Column()
+    qntdAfter: number;
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

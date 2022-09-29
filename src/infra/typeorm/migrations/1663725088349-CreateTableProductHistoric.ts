@@ -38,6 +38,10 @@ export class CreateTableProductHistoric1663725088349 implements MigrationInterfa
                             type: 'integer',
                         },
                         {
+                            name: 'qntdAfter',
+                            type: 'integer',
+                        },
+                        {
                             name: 'created_at',
                             type: 'timestamp',
                             default: 'now()',

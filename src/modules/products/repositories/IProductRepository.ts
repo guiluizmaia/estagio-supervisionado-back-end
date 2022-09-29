@@ -15,6 +15,7 @@ export interface ProductHistoricDtos {
     type: string;
     paidPrice: number;
     qntd: number;
+    qntdAfter: number;
   }
 
 interface IProductRepository {
