@@ -22,7 +22,7 @@ export class UserRepository implements IUserRepository {
     }
     
     async create(user: UserDtos): Promise<User> {
-        const create = await this.repository.create(user);
+        const create = this.repository.create(user);
         return this.repository.save(create)
     }
 

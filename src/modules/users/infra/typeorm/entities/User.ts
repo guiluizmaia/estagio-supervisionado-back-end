@@ -1,6 +1,7 @@
 import { Clients } from "src/modules/clients/infra/typeorm/entities/Clients";
 import { Product } from "src/modules/products/infra/typeorm/entities/Product";
 import { Provider } from "src/modules/providers/infra/typeorm/entities/Provider";
+import { Sales } from "src/modules/sales/infra/typeorm/entities/Sales";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Permission } from "./Permission";
 
@@ -17,6 +18,8 @@ export class User {
     permissionId: string;
     @OneToMany((type) => Clients, user => User)
     clients: Promise<Clients[]>;
+    @OneToMany((type) => Sales, user => User)
+    sales: Promise<Sales[]>;
     @Column()
     name: string;
     @Column()
