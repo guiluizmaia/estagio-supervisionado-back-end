@@ -7,6 +7,7 @@ export interface ProviderDtos {
   cnpj: string;
   email: string;
   obs: string;
+  exclude: boolean;
 }
 
 interface IProviderRepository {

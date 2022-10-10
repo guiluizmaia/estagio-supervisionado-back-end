@@ -22,7 +22,7 @@ class CreateProviderService {
 
         data.userId = user.id
 
-        return this.providerRepository.create(data);
+        return this.providerRepository.create({...data, exclude: false});
     }
 }
 
