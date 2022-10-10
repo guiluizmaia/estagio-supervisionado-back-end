@@ -1,7 +1,7 @@
 import INumeric from "src/infra/utils/Numerics/INumeric";
 import { inject, injectable } from "tsyringe";
-import { FormPayment } from "../infra/typeorm/entities/FormPayment";
-import IFormPaymentRepository from "../repositories/IFormPaymentRepository";
+import { Sales } from "../infra/typeorm/entities/Sales";
+import ISalesRepository from "../repositories/ISalesRepository";
 
 interface IRequest {
     page: number;
@@ -9,29 +9,29 @@ interface IRequest {
 }
   
 interface IResponse {
-  result: FormPayment[],
+  result: Sales[],
   page: number,
   lastPage: number
 }
 
 @injectable()
-class IndexFormPaymentService {
+class IndexSalesService {
     constructor(
-        @inject('FormPaymentRepository')
-        private formPaymentRepository: IFormPaymentRepository,
+        @inject('SalesRepository')
+        private salesRepository: ISalesRepository,
         @inject('Numeric')
         private numeric: INumeric,
     ){}
 
     public async execute({page, quant = 10}: IRequest): Promise<IResponse>{
-        const count = await this.formPaymentRepository.count()
+        const count = await this.salesRepository.count()
         let lastPage = count / quant
         
         if(this.numeric.isFloat(lastPage)) lastPage = parseInt(String(lastPage + 1))
     
         let pageFind = 0
         if (page !== 0) pageFind = page - 1
-        const result = await this.formPaymentRepository.index(pageFind * quant, quant);
+        const result = await this.salesRepository.index(pageFind * quant, quant);
     
         return {
           result,
@@ -42,4 +42,4 @@ class IndexFormPaymentService {
 
 }
 
-export default IndexFormPaymentService
+export default IndexSalesService

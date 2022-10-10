@@ -3,6 +3,7 @@ import clientsRoutes from 'src/modules/clients/infra/http/routes/Clients.routes'
 import productRoutes from 'src/modules/products/infra/http/routes/Products.routes';
 import providerRoutes from 'src/modules/providers/infra/http/routes/Provider.routes';
 import formPaymentRoutes from 'src/modules/sales/infra/http/routes/FormPayment.routes';
+import salesRoutes from 'src/modules/sales/infra/http/routes/Sales.routes';
 import permissionRoutes from 'src/modules/users/infra/http/routes/Permission.routes';
 import userRoutes from 'src/modules/users/infra/http/routes/User.routes';
 import authenticateRoutes from '../../../modules/users/infra/http/routes/Authenticate.routes';
@@ -17,6 +18,7 @@ v1Routes.use('/permissions', ensureAuthenticated, permissionRoutes)
 v1Routes.use('/products', ensureAuthenticated, productRoutes)
 v1Routes.use('/providers', ensureAuthenticated, providerRoutes)
 v1Routes.use('/form-payments', ensureAuthenticated, formPaymentRoutes)
+v1Routes.use('/sales', ensureAuthenticated, salesRoutes)
 
 
 export default v1Routes;

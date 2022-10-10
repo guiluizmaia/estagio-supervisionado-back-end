@@ -20,7 +20,7 @@ export class Sales {
     @ManyToOne((type) => User, user => user.sales, {
         eager: true
     })
-    @JoinColumn({name: "userId"})
+    @JoinColumn({name: "usersId"})
     user: User
     @Column()
     formPaymentId: string;
@@ -33,12 +33,13 @@ export class Sales {
     amount: number;
     @ManyToMany((type) => Product, {
         cascade: true,
-        eager: true
+        eager: true,
+        onDelete: "CASCADE"
     })
     @JoinTable({
         name: "products_sales",
         joinColumn: { name: "saleId", referencedColumnName: "id"},
-        inverseJoinColumn: { name: "productId" }
+        inverseJoinColumn: { name: "productId" },
     })
     products: Product[];
     @CreateDateColumn()

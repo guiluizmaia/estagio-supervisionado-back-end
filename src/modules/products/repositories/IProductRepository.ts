@@ -20,6 +20,7 @@ export interface ProductHistoricDtos {
 
 interface IProductRepository {
   findById(id: String): Promise<Product | undefined>;
+  findByIds(ids: String[]): Promise<Product[]>;
   create(product: ProductDtos): Promise<Product>;
   createHistoric(historic: ProductHistoricDtos): Promise<ProductHistoric>;
   save(product: Product): Promise<Product>;

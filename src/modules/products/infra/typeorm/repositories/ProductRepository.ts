@@ -1,5 +1,5 @@
 import IProductRepository, { ProductDtos, ProductHistoricDtos } from "src/modules/products/repositories/IProductRepository";
-import { getRepository, Repository, ILike } from "typeorm";
+import { getRepository, Repository, ILike, In } from "typeorm";
 import { Product } from "../entities/Product";
 import { ProductHistoric } from "../entities/ProductHistoric";
 
@@ -11,6 +11,13 @@ export class ProductRepository implements IProductRepository{
     constructor(){
         this.repository = getRepository(Product);
     }
+    
+    async findByIds(ids: String[]): Promise<Product[]> {
+        return this.repository.find({where: {
+            id: In(ids)
+        }})
+    }
+
     async countSearch(name: string): Promise<number> {
         return this.repository.count({where: {name: ILike(`%${name}%`)}});
     }
@@ -24,7 +31,7 @@ export class ProductRepository implements IProductRepository{
     }
     
     async createHistoric(historic: ProductHistoricDtos): Promise<ProductHistoric> {
-        const create = await this.historicRepository.create(historic);
+        const create = this.historicRepository.create(historic);
         return this.historicRepository.save(create)
     }
 
@@ -33,13 +40,12 @@ export class ProductRepository implements IProductRepository{
     }
 
     async create(product: ProductDtos): Promise<Product> {
-        const create = await this.repository.create(product);
+        const create = this.repository.create(product);
         return this.repository.save(create)
     }
 
     async save(product: Product): Promise<Product> {
-        const create = this.repository.create(product);
-        return this.repository.save(create);
+        return this.repository.save(product);
     }
 
     async index(skip: number = 0, take: number = 10): Promise<Product[]> {
