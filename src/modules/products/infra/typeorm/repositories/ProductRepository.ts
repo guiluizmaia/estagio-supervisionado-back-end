@@ -10,6 +10,7 @@ export class ProductRepository implements IProductRepository{
 
     constructor(){
         this.repository = getRepository(Product);
+        this.historicRepository = getRepository(ProductHistoric);
     }
     
     async findByIds(ids: String[]): Promise<Product[]> {
