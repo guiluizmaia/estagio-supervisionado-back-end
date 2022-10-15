@@ -31,17 +31,6 @@ export class Sales {
     formPayment: FormPayment
     @Column()
     amount: number;
-    @ManyToMany((type) => Product, {
-        cascade: true,
-        eager: true,
-        onDelete: "CASCADE"
-    })
-    @JoinTable({
-        name: "products_sales",
-        joinColumn: { name: "saleId", referencedColumnName: "id"},
-        inverseJoinColumn: { name: "productId" },
-    })
-    products: Product[];
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

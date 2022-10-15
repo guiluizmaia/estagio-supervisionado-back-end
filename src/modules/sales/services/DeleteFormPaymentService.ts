@@ -1,3 +1,4 @@
+import AppError from "src/infra/http/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import IFormPaymentRepository from "../repositories/IFormPaymentRepository";
 
@@ -13,7 +14,11 @@ class DeleteFormPaymentService {
     ){}
 
     public async execute({id}: IRequest): Promise<void>{
-        await this.formPaymentRepository.delete(id);
+        const formPayment = await this.formPaymentRepository.findById(id);
+
+        if (!formPayment) throw new AppError("Form Payment not found", 404)
+
+        await this.formPaymentRepository.save({...formPayment, active: false})
     }
 
 }

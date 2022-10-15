@@ -1,3 +1,4 @@
+import AppError from "src/infra/http/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { FormPayment } from "../infra/typeorm/entities/FormPayment";
 import IFormPaymentRepository from "../repositories/IFormPaymentRepository";
@@ -14,7 +15,10 @@ class CreateFormPaymentService {
     ){}
 
     public async execute({formPayment}: IRequest): Promise<FormPayment>{
-        
+        const already = await this.formPaymentRepository.findByName(formPayment);
+
+        if (already) throw new AppError("Form Payment already exists", 400)
+
         return this.formPaymentRepository.create({formPayment});
     }
 

@@ -7,6 +7,8 @@ export class FormPayment {
     id: string;
     @Column()
     formPayment: string;
+    @Column()
+    active: boolean;
     @OneToMany((type) => Sales, formPayment => FormPayment)
     sales: Promise<Sales[]>;
     @CreateDateColumn()

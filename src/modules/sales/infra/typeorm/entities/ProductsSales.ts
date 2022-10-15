@@ -10,6 +10,10 @@ export class ProductsSales {
     saleId: string;
     @Column()
     qntd: number;
+    @Column()
+    name: string;
+    @Column()
+    price: number;
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

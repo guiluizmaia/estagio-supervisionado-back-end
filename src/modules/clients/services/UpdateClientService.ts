@@ -27,6 +27,12 @@ class UpdateClientService {
     if (!userCreater) {
       throw new AppError('User not found!', 404);
     }
+    
+    const clientscpf = await this.clientsRepository.findByCpf(data.cpf);
+
+    if (clientscpf && clientscpf.id !== id) {
+      throw new AppError('Clients with this cpf already exists!', 401);
+    }
 
     if(!id){
       const client = await this.clientsRepository.findByCpf(data.cpf);
@@ -58,6 +64,7 @@ class UpdateClientService {
   
     Object.assign(client, data);
   
+    console.log(data)
     return this.clientsRepository.save(client)
     
   }

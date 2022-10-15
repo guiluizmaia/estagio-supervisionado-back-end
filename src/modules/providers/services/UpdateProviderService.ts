@@ -20,7 +20,7 @@ class UpdateProviderService {
 
         Object.assign(provider, data)
 
-        return this.providerRepository.create(provider);
+        return this.providerRepository.save(provider);
     }
 }
 

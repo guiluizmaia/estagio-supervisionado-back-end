@@ -13,6 +13,8 @@ export interface SalesProductsDtos{
     productId: string;
     saleId: string;
     qntd: number;
+    name: string;
+    price: number;
 }
 
 interface ISalesRepository {
@@ -22,6 +24,7 @@ interface ISalesRepository {
     findByPaymentId(id: string): Promise<Sales[]>;
     create(sale: SaleDtos): Promise<Sales>;
     createSalesProducts(sale: SalesProductsDtos): Promise<ProductsSales>;
+    FindBySaleIdSalesProducts(id: string): Promise<ProductsSales[]>;
     save(sale: Sales): Promise<Sales>;
     index(skip?: number, take?: number): Promise<Sales[]>;
     count(): Promise<number>;

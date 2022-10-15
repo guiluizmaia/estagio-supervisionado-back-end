@@ -13,6 +13,10 @@ export class SalesRepository implements ISalesRepository{
         this.repositoryProductSales = getRepository(ProductsSales);
     }
     
+    async FindBySaleIdSalesProducts(id: string): Promise<ProductsSales[]> {
+        return this.repositoryProductSales.find({where: {saleId: id}})
+    }
+    
     async createSalesProducts(sale: SalesProductsDtos): Promise<ProductsSales> {
         const created = this.repositoryProductSales.create(sale);
         return this.repositoryProductSales.save(created);

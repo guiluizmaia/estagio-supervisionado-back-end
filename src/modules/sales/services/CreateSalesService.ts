@@ -56,7 +56,9 @@ class CreateSalesService {
                 await this.salesRepository.createSalesProducts({
                     productId: productFind.id,
                     saleId: sale.id,
-                    qntd: productSale ? productSale.qntd : 0
+                    qntd: productSale ? productSale.qntd : 0,
+                    name: productFind.name,
+                    price: productFind.salePrice,
                 })
             })
         )

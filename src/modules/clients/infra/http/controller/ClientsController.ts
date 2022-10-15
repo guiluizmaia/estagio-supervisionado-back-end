@@ -19,12 +19,12 @@ class ClientsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, rg, cpf, phones, addresses, active, id } = request.body;
+    const data = request.body;
     const { email: emailCreater } = request.user;
 
     const user = await container
       .resolve(UpdateClientService)
-      .execute({ id, name, rg, cpf, phones, addresses, emailCreater, active });
+      .execute({ ...data, emailCreater });
 
     return response.status(200).json(user);
   }

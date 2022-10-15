@@ -6,6 +6,7 @@ export interface FormPaymentDtos{
 
 interface IFormPaymentRepository {
     findById(id: string): Promise<FormPayment | undefined>;
+    findByName(name: string): Promise<FormPayment | undefined>;
     create(formPayment: FormPaymentDtos): Promise<FormPayment>;
     save(formPayment: FormPayment): Promise<FormPayment>;
     index(skip?: number, take?: number): Promise<FormPayment[]>;

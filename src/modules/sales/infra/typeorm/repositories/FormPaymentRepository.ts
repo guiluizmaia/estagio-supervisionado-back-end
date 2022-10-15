@@ -1,5 +1,5 @@
 import IFormPaymentRepository, { FormPaymentDtos } from "src/modules/sales/repositories/IFormPaymentRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, ILike } from "typeorm";
 import { FormPayment } from "../entities/FormPayment";
 
 export class FormPaymentRepository implements IFormPaymentRepository {
@@ -7,6 +7,9 @@ export class FormPaymentRepository implements IFormPaymentRepository {
     
     constructor(){
         this.repository = getRepository(FormPayment);
+    }
+    async findByName(name: string): Promise<FormPayment | undefined> {
+        return this.repository.findOne({where:{formPayment: ILike(`%${name}%`), active: true}});
     }
 
     async findById(id: string): Promise<FormPayment | undefined> {
@@ -25,12 +28,13 @@ export class FormPaymentRepository implements IFormPaymentRepository {
     async index(skip: number = 0, take: number = 0): Promise<FormPayment[]> {
         return this.repository.find({
             skip,
-            take
+            take,
+            where: {active: true}
         })
     }
     
     async count(): Promise<number> {
-        return this.repository.count();
+        return this.repository.count({where: {active: true}});
     }
     
     async delete(id: string): Promise<void> {
