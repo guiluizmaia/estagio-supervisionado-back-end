@@ -64,9 +64,7 @@ class UpdateClientService {
   
     Object.assign(client, data);
   
-    console.log(data)
     return this.clientsRepository.save(client)
-    
   }
 }
 

@@ -31,6 +31,8 @@ export class Sales {
     formPayment: FormPayment
     @Column()
     amount: number;
+    @Column()
+    canceled: boolean;
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

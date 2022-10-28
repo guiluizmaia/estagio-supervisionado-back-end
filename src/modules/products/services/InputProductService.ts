@@ -1,14 +1,21 @@
-import AppError from "src/infra/http/errors/AppError";
 import { inject, injectable } from "tsyringe";
-import { Product } from "../infra/typeorm/entities/Product";
+import { ProductsInput, ProductsInput_products } from "../infra/typeorm/entities/ProductHistoric";
 import IProductRepository from "../repositories/IProductRepository";
 
 interface IRequest {
-    id: string;
-    qntd: number;
-    paidPrice: number;
+    date: Date;
+    products: {
+        productId: string;
+        name: string;
+        price?: number;
+        type: "ADD" | "SUB";
+        qntd: number;
+    }[]
 }
 
+interface IResponse extends ProductsInput {
+    products: ProductsInput_products[]
+}
 @injectable()
 class InputProductService {
     constructor(
@@ -16,22 +23,37 @@ class InputProductService {
         private productRepository: IProductRepository,
       ) {}
 
-    public async execute({id, qntd, paidPrice}: IRequest): Promise<Product>{
-        const product = await this.productRepository.findById(id);
-
-        if (!product) throw new AppError("product not found", 404)
-
-        Object.assign(product, {id, paidPrice, qntd: qntd + product.qntd})
-
-        await this.productRepository.createHistoric({
-            type: "INPUT",
-            qntd: qntd,
-            qntdAfter: product.qntd,
-            paidPrice: product.paidPrice,
-            productId: product.id
+    public async execute({date, products}: IRequest): Promise<IResponse>{
+        const productInput = await this.productRepository.createProductInput({date});
+        await Promise.all(
+        products.map(async product => {
+            const productFind = await this.productRepository.findById(product.productId);
+            if(productFind){
+                await this.productRepository.createProductInput_Products({
+                    name: product.name,
+                    productId: product.productId,
+                    productsInputId: productInput.id,
+                    qntd: product.qntd,
+                    type: product.type,
+                    price: product.price
+                })
+                if (product.type === "ADD"){
+                    const price = product.price ? product.price : productFind.paidPrice
+                    Object.assign(productFind, {paidPrice: price, qntd: productFind.qntd + product.qntd})
+                    await this.productRepository.save(productFind);
+                } else if (product.type === "SUB"){
+                    Object.assign(productFind, {qntd: productFind.qntd - product.qntd})
+                    await this.productRepository.save(productFind);
+                }
+            }
         })
+        )
+        const productsInputRelational = await this.productRepository.findByProductInputId(productInput.id)
 
-        return this.productRepository.save(product);
+        return {
+            ...productInput,
+            products: productsInputRelational
+        }
     }
 }
 

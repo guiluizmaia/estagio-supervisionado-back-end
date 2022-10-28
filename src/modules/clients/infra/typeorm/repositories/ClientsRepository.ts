@@ -14,7 +14,7 @@ export class ClientsRepository implements IClientsRepository{
     }
 
     async countSearch(name: string): Promise<number> {
-        return this.repository.count({where: {name: ILike(`%${name}%`), exclude: false}});
+        return this.repository.count({where: [{name: ILike(`%${name}%`), exclude: false}, {cpf: ILike(`%${name}%`), exclude: false}]});
     }
     
     
@@ -45,7 +45,7 @@ export class ClientsRepository implements IClientsRepository{
     
     async search(name: string, skip: number = 0, take: number = 10): Promise<Clients[]> {
         return this.repository.find({
-            where: {name: ILike(`%${name}%`), exclude: false},
+            where: [{name: ILike(`%${name}%`), exclude: false}, {cpf: ILike(`%${name}%`), exclude: false}],
             skip,
             take
         })

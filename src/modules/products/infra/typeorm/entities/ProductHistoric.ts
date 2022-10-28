@@ -21,3 +21,37 @@ export class ProductHistoric {
     @UpdateDateColumn()
     updated_at: Date;
 }
+
+@Entity('productsInput')
+export class ProductsInput {
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
+    @Column()
+    date: Date;
+    @CreateDateColumn()
+    created_at: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
+}
+
+@Entity('productsInput_products')
+export class ProductsInput_products {
+    @PrimaryGeneratedColumn("uuid")
+    id?: string;
+    @Column()
+    productsInputId: string;
+    @Column()
+    productId: string;
+    @Column()
+    name: string;
+    @Column()
+    price?: number;
+    @Column()
+    type: "ADD" | "SUB";
+    @Column()
+    qntd: number;
+    @CreateDateColumn()
+    created_at: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
+}

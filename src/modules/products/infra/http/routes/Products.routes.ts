@@ -9,6 +9,8 @@ const productController = new ProductController();
 productRoutes.post('/', productController.create);
 productRoutes.patch('/', productController.update);
 productRoutes.post('/input', productController.input);
+productRoutes.get('/input', productController.indexInput);
+productRoutes.get('/input/:id', productController.findByIdInput);
 productRoutes.get('/', productController.index);
 productRoutes.delete('/:id', productController.delete);
 productRoutes.get('/:id', productController.findById);

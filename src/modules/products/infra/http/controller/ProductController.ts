@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import CreateProductService from 'src/modules/products/services/CreateProductService';
 import DeleteProductService from 'src/modules/products/services/DeleteProductService';
+import FindByIdProductInputService from 'src/modules/products/services/FindByIdProductInputService';
 import FindByIdProductService from 'src/modules/products/services/FindByIdProductService';
 import IndexAndSearchProductService from 'src/modules/products/services/IndexAndSearchProductService';
+import IndexProductInputService from 'src/modules/products/services/IndexProductInputService';
 import IndexProductService from 'src/modules/products/services/IndexProductService';
 import InputProductService from 'src/modules/products/services/InputProductService';
 import UpdateProductService from 'src/modules/products/services/UpdateProductService';
@@ -78,6 +80,28 @@ class ProductController {
       .execute(data);
 
     return response.status(200).json(product);
+  }
+
+  public async indexInput(request: Request, response: Response): Promise<Response> {
+    let { page } = request.query;
+
+    if(isNaN(Number(page))) page = '0'
+
+    const productsInput = await container
+      .resolve(IndexProductInputService)
+      .execute({page: Number(page)});
+
+    return response.status(200).json(productsInput);
+  }
+
+  public async findByIdInput(request: Request, response: Response): Promise<Response> {
+    const {id} = request.params;
+
+    const productInput = await container
+      .resolve(FindByIdProductInputService)
+      .execute({id});
+
+    return response.status(200).json(productInput);
   }
 
 }
