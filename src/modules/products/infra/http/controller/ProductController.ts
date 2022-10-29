@@ -83,13 +83,28 @@ class ProductController {
   }
 
   public async indexInput(request: Request, response: Response): Promise<Response> {
-    let { page } = request.query;
+    let { page, startdate, enddate } = request.query;
+
+    let startDate;
+    let endDate;
 
     if(isNaN(Number(page))) page = '0'
 
+    if(!startdate){ 
+      startDate = new Date('2021-07-12')
+    } else {
+      startDate = new Date(String(startdate))
+    }
+
+    if(!enddate){ 
+      endDate = new Date()
+    } else {
+      endDate = new Date(String(enddate))
+    }
+
     const productsInput = await container
       .resolve(IndexProductInputService)
-      .execute({page: Number(page)});
+      .execute({page: Number(page), startDate, endDate});
 
     return response.status(200).json(productsInput);
   }

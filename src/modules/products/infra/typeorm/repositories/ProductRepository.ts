@@ -1,5 +1,5 @@
 import IProductRepository, { ProductDtos, ProductHistoricDtos, ProductInputDtos, ProductInput_ProductsDtos } from "src/modules/products/repositories/IProductRepository";
-import { getRepository, Repository, ILike, In } from "typeorm";
+import { getRepository, Repository, ILike, In, MoreThanOrEqual, LessThanOrEqual, Raw } from "typeorm";
 import { Product } from "../entities/Product";
 import { ProductHistoric, ProductsInput, ProductsInput_products } from "../entities/ProductHistoric";
 
@@ -16,14 +16,22 @@ export class ProductRepository implements IProductRepository{
         this.productInputRelational = getRepository(ProductsInput_products);
     }
     
-    async countProductInput(): Promise<number> {
-        return this.productInput.count();
+    async countProductInput(startDate: Date, endDate: Date): Promise<number> {
+        return this.productInput.count({
+            where: {
+                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+            }
+        }
+        );
     }
 
-    async indexProductInput(skip: number = 0, take: number = 10): Promise<ProductsInput[]> {
+    async indexProductInput(startDate: Date, endDate: Date, skip: number = 0, take: number = 10): Promise<ProductsInput[]> {
         return this.productInput.find({
             skip,
-            take
+            take,
+            where: {
+                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+            }
         })
     }
     

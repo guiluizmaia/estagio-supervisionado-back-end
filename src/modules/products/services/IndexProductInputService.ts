@@ -6,6 +6,8 @@ import IProductRepository from "../repositories/IProductRepository";
 interface IRequest {
     page: number;
     quant?: number;
+    startDate: Date;
+    endDate: Date;
   }
   
 interface Result extends ProductsInput {
@@ -26,15 +28,15 @@ class IndexProductInputService {
         private numeric: INumeric,
       ) {}
     
-      public async execute({page, quant = 10}: IRequest): Promise<IResponse>{
-        const count = await this.productRepository.count()
+      public async execute({page, quant = 10, startDate, endDate}: IRequest): Promise<IResponse>{
+        const count = await this.productRepository.countProductInput(startDate, endDate)
         let lastPage = count / quant
         
         if(this.numeric.isFloat(lastPage)) lastPage = parseInt(String(lastPage + 1))
     
         let pageFind = 0
         if (page !== 0) pageFind = page - 1
-        const inputs = await this.productRepository.indexProductInput(pageFind * quant, quant);
+        const inputs = await this.productRepository.indexProductInput(startDate, endDate, pageFind * quant, quant);
     
         const result: Result[] = []
 

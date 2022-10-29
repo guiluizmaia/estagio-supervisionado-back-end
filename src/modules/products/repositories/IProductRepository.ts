@@ -45,9 +45,9 @@ interface IProductRepository {
   findByProductInputId(id: String): Promise<ProductsInput_products[]>;
   save(product: Product): Promise<Product>;
   index(skip?: number, take?: number): Promise<Product[]>;
-  indexProductInput(skip?: number, take?: number): Promise<ProductsInput[]>;
+  indexProductInput(startDate: Date, endDate: Date, skip?: number, take?: number): Promise<ProductsInput[]>;
   count(): Promise<number>;
-  countProductInput(): Promise<number>;
+  countProductInput(startDate: Date, endDate: Date): Promise<number>;
   delete(id: string): Promise<void>;
   countSearch(name: string): Promise<number>
   search(name: string, skip?: number, take?: number): Promise<Product[]>;

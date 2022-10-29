@@ -17,6 +17,10 @@ class UpdateFormPaymentService {
 
         Object.assign(formPayment, formPaymentNew)
 
+        const already = await this.formPaymentRepository.findByName(formPaymentNew.formPayment);
+
+        if (already) throw new AppError("Form Payment already exists", 400)
+
         return this.formPaymentRepository.save(formPayment);
     }
 
