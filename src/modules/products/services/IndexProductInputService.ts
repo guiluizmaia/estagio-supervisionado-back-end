@@ -1,4 +1,4 @@
-import INumeric from "src/infra/utils/Numerics/INumeric";
+import INumeric from "../../../infra/utils/Numerics/INumeric";
 import { inject, injectable } from "tsyringe";
 import { ProductsInput, ProductsInput_products } from "../infra/typeorm/entities/ProductHistoric";
 import IProductRepository from "../repositories/IProductRepository";

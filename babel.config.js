@@ -9,8 +9,7 @@ module.exports = {
         {
           alias: {
             '@infra': './src/infra',
-            '@modules': './src/modules',
-            '@tests/': './src/tests'
+            '@modules': './src/modules'
           },
         },
       ],

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import IUserRepository, { UserDtos } from '../repositories/IUserRepository';
 import ICryptHash from '../../../infra/utils/CryptHash/ICryptHash';
-import AppError from 'src/infra/http/errors/AppError';
+import AppError from '../../../infra/http/errors/AppError';
 import { User } from '../infra/typeorm/entities/User';
 import IPermissionsRepository from '../repositories/IPermissionsRepository';
 
@@ -56,8 +56,7 @@ class UpdateUserService {
         user.password = await this.cryptHash.create(password);
       }
 
-      if(user.email !== 'admin@admin.com')
-        return this.userRepository.save(user);
+      return this.userRepository.save(user);
     } else {
       const user = await this.userRepository.findById(id);
 
@@ -81,8 +80,7 @@ class UpdateUserService {
         user.password = await this.cryptHash.create(password);
       }
 
-      if(user.email !== 'admin@admin.com')
-        return this.userRepository.save(user);
+      return this.userRepository.save(user);
     }
   }
 }

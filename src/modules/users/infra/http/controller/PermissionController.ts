@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import IndexPermissionsService from 'src/modules/users/services/IndexPermissionsService';
+import IndexPermissionsService from '../../../../../modules/users/services/IndexPermissionsService';
 import { container } from 'tsyringe';
 
 class PermissionController {

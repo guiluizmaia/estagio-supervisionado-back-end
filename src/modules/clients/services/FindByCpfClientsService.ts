@@ -3,9 +3,9 @@
 import { inject, injectable } from 'tsyringe';
 import IClientsRepository, { ClientsDtos } from '../repositories/IClientsRepository';
 import { Clients } from '../infra/typeorm/entities/Clients';
-import IUserRepository from 'src/modules/users/repositories/IUserRepository';
-import { Phones } from 'src/modules/commonData/infra/typeorm/entities/Phones';
-import AppError from 'src/infra/http/errors/AppError';
+import IUserRepository from '../../../modules/users/repositories/IUserRepository';
+import { Phones } from '../../../modules/commonData/infra/typeorm/entities/Phones';
+import AppError from '../../../infra/http/errors/AppError';
 
 @injectable()
 class FindByCpfClientsService {

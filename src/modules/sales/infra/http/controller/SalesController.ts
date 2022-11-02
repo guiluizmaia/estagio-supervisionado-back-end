@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import CreateSalesService from 'src/modules/sales/services/CreateSalesService';
-import DeleteSalesService from 'src/modules/sales/services/DeleteSalesService';
-import FindByIdSalesService from 'src/modules/sales/services/FindByIdSalesService';
-import FindSalesService from 'src/modules/sales/services/FindSalesService';
-import IndexSalesService from 'src/modules/sales/services/IndexSalesService';
-import UpdateSalesService from 'src/modules/sales/services/UpdateSalesService';
+import CreateSalesService from '../../../../../modules/sales/services/CreateSalesService';
+import DeleteSalesService from '../../../../../modules/sales/services/DeleteSalesService';
+import FindByIdSalesService from '../../../../../modules/sales/services/FindByIdSalesService';
+import FindSalesService from '../../../../../modules/sales/services/FindSalesService';
+import IndexSalesService from '../../../../../modules/sales/services/IndexSalesService';
+import UpdateSalesService from '../../../../../modules/sales/services/UpdateSalesService';
 import { container } from 'tsyringe';
 
 class SalesController {

@@ -1,4 +1,4 @@
-import CryptHash from "src/infra/utils/CryptHash/CryptHash";
+import CryptHash from "../../../infra/utils/CryptHash/CryptHash";
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class AddUserAdmin1661470437780 implements MigrationInterface {

@@ -1,8 +1,8 @@
 
-import { FormPaymentRepository } from 'src/modules/sales/infra/typeorm/repositories/FormPaymentRepository';
-import { SalesRepository } from 'src/modules/sales/infra/typeorm/repositories/SalesRepository';
-import IFormPaymentRepository from 'src/modules/sales/repositories/IFormPaymentRepository';
-import ISalesRepository from 'src/modules/sales/repositories/ISalesRepository';
+import { FormPaymentRepository } from '../../../modules/sales/infra/typeorm/repositories/FormPaymentRepository';
+import { SalesRepository } from '../../../modules/sales/infra/typeorm/repositories/SalesRepository';
+import IFormPaymentRepository from '../../../modules/sales/repositories/IFormPaymentRepository';
+import ISalesRepository from '../../../modules/sales/repositories/ISalesRepository';
 import { DependencyContainer } from 'tsyringe';
 
 class SalesModules {

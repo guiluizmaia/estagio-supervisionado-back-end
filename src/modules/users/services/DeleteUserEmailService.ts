@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import IUserRepository from '../repositories/IUserRepository';
-import AppError from 'src/infra/http/errors/AppError';
+import AppError from '../../../infra/http/errors/AppError';
 
 interface IRequest {
   emailDeleter: string;

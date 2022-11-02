@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateClientService from 'src/modules/clients/services/CreateClientService';
-import FindByCpfClientsService from 'src/modules/clients/services/FindByCpfClientsService';
-import IndexAndSearchClientsService from 'src/modules/clients/services/IndexAndSearchClientsService';
-import IndexClientsService from 'src/modules/clients/services/IndexClientsService';
-import UpdateClientService from 'src/modules/clients/services/UpdateClientService';
+import CreateClientService from '../../../services/CreateClientService';
+import FindByCpfClientsService from '../../../services/FindByCpfClientsService';
+import IndexAndSearchClientsService from '../../../services/IndexAndSearchClientsService';
+import IndexClientsService from '../../../services/IndexClientsService';
+import UpdateClientService from '../../../services/UpdateClientService';
 import { container } from 'tsyringe';
 
 class ClientsController {

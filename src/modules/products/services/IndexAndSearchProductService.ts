@@ -1,5 +1,5 @@
-import AppError from "src/infra/http/errors/AppError";
-import INumeric from "src/infra/utils/Numerics/INumeric";
+import AppError from "../../../infra/http/errors/AppError";
+import INumeric from "../../../infra/utils/Numerics/INumeric";
 import { inject, injectable } from "tsyringe";
 import { Product } from "../infra/typeorm/entities/Product";
 import IProductRepository from "../repositories/IProductRepository";

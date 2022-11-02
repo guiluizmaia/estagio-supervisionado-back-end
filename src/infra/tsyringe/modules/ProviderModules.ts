@@ -1,6 +1,6 @@
 
-import { ProviderRepository } from 'src/modules/providers/infra/typeorm/repositories/ProviderRepository';
-import IProviderRepository from 'src/modules/providers/repositories/IProviderRepository';
+import { ProviderRepository } from '../../../modules/providers/infra/typeorm/repositories/ProviderRepository';
+import IProviderRepository from '../../../modules/providers/repositories/IProviderRepository';
 import { DependencyContainer } from 'tsyringe';
 
 class ProviderModules {

@@ -2,10 +2,10 @@
 
 import { inject, injectable } from 'tsyringe';
 import IClientsRepository, { ClientsDtos } from '../repositories/IClientsRepository';
-import AppError from 'src/infra/http/errors/AppError';
+import AppError from '../../../infra/http/errors/AppError';
 import { Clients } from '../infra/typeorm/entities/Clients';
-import IUserRepository from 'src/modules/users/repositories/IUserRepository';
-import { Phones } from 'src/modules/commonData/infra/typeorm/entities/Phones';
+import IUserRepository from '../../../modules/users/repositories/IUserRepository';
+import { Phones } from '../../../modules/commonData/infra/typeorm/entities/Phones';
 
 interface IRequest extends ClientsDtos {
   emailCreater: string;

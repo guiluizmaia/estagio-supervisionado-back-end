@@ -1,7 +1,7 @@
-import { Addresses } from "src/modules/commonData/infra/typeorm/entities/Addresses";
-import { Phones } from "src/modules/commonData/infra/typeorm/entities/Phones";
-import { Sales } from "src/modules/sales/infra/typeorm/entities/Sales";
-import { User } from "src/modules/users/infra/typeorm/entities/User";
+import { Addresses } from "../../../../../modules/commonData/infra/typeorm/entities/Addresses";
+import { Phones } from "../../../../../modules/commonData/infra/typeorm/entities/Phones";
+import { Sales } from "../../../../../modules/sales/infra/typeorm/entities/Sales";
+import { User } from "../../../../../modules/users/infra/typeorm/entities/User";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('clients')

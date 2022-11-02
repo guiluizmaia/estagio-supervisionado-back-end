@@ -1,11 +1,11 @@
 import AuthenticateService from '../../../services/AuthenticateService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import CreateUserService from 'src/modules/users/services/CreateUserService';
-import UpdateUserService from 'src/modules/users/services/UpdateUserService';
-import IndexUsersService from 'src/modules/users/services/IndexUsersService';
-import FindUserByEmailService from 'src/modules/users/services/FindUserByEmailService';
-import DeleteUserEmailService from 'src/modules/users/services/DeleteUserEmailService';
+import CreateUserService from '../../../../../modules/users/services/CreateUserService';
+import UpdateUserService from '../../../../../modules/users/services/UpdateUserService';
+import IndexUsersService from '../../../../../modules/users/services/IndexUsersService';
+import FindUserByEmailService from '../../../../../modules/users/services/FindUserByEmailService';
+import DeleteUserEmailService from '../../../../../modules/users/services/DeleteUserEmailService';
 
 class UserController {
   public async create(request: Request, response: Response): Promise<Response> {

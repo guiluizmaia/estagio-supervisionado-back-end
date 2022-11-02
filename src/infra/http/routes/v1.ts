@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
-import clientsRoutes from 'src/modules/clients/infra/http/routes/Clients.routes';
-import productRoutes from 'src/modules/products/infra/http/routes/Products.routes';
-import providerRoutes from 'src/modules/providers/infra/http/routes/Provider.routes';
-import formPaymentRoutes from 'src/modules/sales/infra/http/routes/FormPayment.routes';
-import salesRoutes from 'src/modules/sales/infra/http/routes/Sales.routes';
-import permissionRoutes from 'src/modules/users/infra/http/routes/Permission.routes';
-import userRoutes from 'src/modules/users/infra/http/routes/User.routes';
+import clientsRoutes from '../../../modules/clients/infra/http/routes/Clients.routes';
+import productRoutes from '../../../modules/products/infra/http/routes/Products.routes';
+import providerRoutes from '../../../modules/providers/infra/http/routes/Provider.routes';
+import formPaymentRoutes from '../../../modules/sales/infra/http/routes/FormPayment.routes';
+import salesRoutes from '../../../modules/sales/infra/http/routes/Sales.routes';
+import permissionRoutes from '../../../modules/users/infra/http/routes/Permission.routes';
+import userRoutes from '../../../modules/users/infra/http/routes/User.routes';
 import authenticateRoutes from '../../../modules/users/infra/http/routes/Authenticate.routes';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 

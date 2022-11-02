@@ -1,7 +1,7 @@
-import { Clients } from "src/modules/clients/infra/typeorm/entities/Clients";
-import { Product } from "src/modules/products/infra/typeorm/entities/Product";
-import { Provider } from "src/modules/providers/infra/typeorm/entities/Provider";
-import { Sales } from "src/modules/sales/infra/typeorm/entities/Sales";
+import { Clients } from "../../../../../modules/clients/infra/typeorm/entities/Clients";
+import { Product } from "../../../../../modules/products/infra/typeorm/entities/Product";
+import { Provider } from "../../../../../modules/providers/infra/typeorm/entities/Provider";
+import { Sales } from "../../../../../modules/sales/infra/typeorm/entities/Sales";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Permission } from "./Permission";
 

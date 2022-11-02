@@ -2,8 +2,8 @@ import { inject, injectable } from 'tsyringe';
 import IUserRepository from '../repositories/IUserRepository';
 import { sign } from 'jsonwebtoken';
 import ICryptHash from '../../../infra/utils/CryptHash/ICryptHash';
-import AppError from 'src/infra/http/errors/AppError';
-import auth from 'src/configs/auth';
+import AppError from '../../../infra/http/errors/AppError';
+import auth from '../../../configs/auth';
 
 interface IRequest {
   email: string;

@@ -1,4 +1,4 @@
-import IProviderRepository, { ProviderDtos } from "src/modules/providers/repositories/IProviderRepository";
+import IProviderRepository, { ProviderDtos } from "../../../../../modules/providers/repositories/IProviderRepository";
 import { getRepository, Repository, ILike } from "typeorm";
 import { Provider } from "../entities/Provider";
 

@@ -1,4 +1,4 @@
-import IProductRepository from "src/modules/products/repositories/IProductRepository";
+import IProductRepository from "../../../modules/products/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 import { Sales } from "../infra/typeorm/entities/Sales";
 import ISalesRepository, { SaleDtos } from "../repositories/ISalesRepository";

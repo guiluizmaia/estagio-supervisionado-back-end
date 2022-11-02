@@ -1,6 +1,6 @@
 
-import { ProductRepository } from 'src/modules/products/infra/typeorm/repositories/ProductRepository';
-import IProductRepository from 'src/modules/products/repositories/IProductRepository';
+import { ProductRepository } from '../../../modules/products/infra/typeorm/repositories/ProductRepository';
+import IProductRepository from '../../../modules/products/repositories/IProductRepository';
 import { DependencyContainer } from 'tsyringe';
 
 class ProductModules {

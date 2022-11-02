@@ -1,8 +1,8 @@
 
-import CryptHash from 'src/infra/utils/CryptHash/CryptHash';
-import ICryptHash from 'src/infra/utils/CryptHash/ICryptHash';
-import INumeric from 'src/infra/utils/Numerics/INumeric';
-import Numeric from 'src/infra/utils/Numerics/Numeric';
+import CryptHash from '../../../infra/utils/CryptHash/CryptHash';
+import ICryptHash from '../../../infra/utils/CryptHash/ICryptHash';
+import INumeric from '../../../infra/utils/Numerics/INumeric';
+import Numeric from '../../../infra/utils/Numerics/Numeric';
 import { DependencyContainer } from 'tsyringe';
 
 class DataGeneratorUtils {

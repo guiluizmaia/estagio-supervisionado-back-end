@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import CreateProductService from 'src/modules/products/services/CreateProductService';
-import DeleteProductService from 'src/modules/products/services/DeleteProductService';
-import FindByIdProductInputService from 'src/modules/products/services/FindByIdProductInputService';
-import FindByIdProductService from 'src/modules/products/services/FindByIdProductService';
-import IndexAndSearchProductService from 'src/modules/products/services/IndexAndSearchProductService';
-import IndexProductInputService from 'src/modules/products/services/IndexProductInputService';
-import IndexProductService from 'src/modules/products/services/IndexProductService';
-import InputProductService from 'src/modules/products/services/InputProductService';
-import UpdateProductService from 'src/modules/products/services/UpdateProductService';
+import CreateProductService from '../../../../../modules/products/services/CreateProductService';
+import DeleteProductService from '../../../../../modules/products/services/DeleteProductService';
+import FindByIdProductInputService from '../../../../../modules/products/services/FindByIdProductInputService';
+import FindByIdProductService from '../../../../../modules/products/services/FindByIdProductService';
+import IndexAndSearchProductService from '../../../../../modules/products/services/IndexAndSearchProductService';
+import IndexProductInputService from '../../../../../modules/products/services/IndexProductInputService';
+import IndexProductService from '../../../../../modules/products/services/IndexProductService';
+import InputProductService from '../../../../../modules/products/services/InputProductService';
+import UpdateProductService from '../../../../../modules/products/services/UpdateProductService';
 import { container } from 'tsyringe';
 
 class ProductController {

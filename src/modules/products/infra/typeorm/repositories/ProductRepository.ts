@@ -1,4 +1,4 @@
-import IProductRepository, { ProductDtos, ProductHistoricDtos, ProductInputDtos, ProductInput_ProductsDtos } from "src/modules/products/repositories/IProductRepository";
+import IProductRepository, { ProductDtos, ProductHistoricDtos, ProductInputDtos, ProductInput_ProductsDtos } from "../../../../../modules/products/repositories/IProductRepository";
 import { getRepository, Repository, ILike, In, MoreThanOrEqual, LessThanOrEqual, Raw } from "typeorm";
 import { Product } from "../entities/Product";
 import { ProductHistoric, ProductsInput, ProductsInput_products } from "../entities/ProductHistoric";

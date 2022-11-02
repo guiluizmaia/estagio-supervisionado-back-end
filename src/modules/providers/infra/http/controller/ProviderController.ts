@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateProviderService from 'src/modules/providers/services/CreateProviderService';
-import FindByIdProviderService from 'src/modules/providers/services/FindByIdProviderService';
-import IndexAndSearchProviderService from 'src/modules/providers/services/IndexAndSearchProviderService';
-import IndexProviderService from 'src/modules/providers/services/IndexProviderService';
-import UpdateProviderService from 'src/modules/providers/services/UpdateProviderService';
+import CreateProviderService from '../../../../../modules/providers/services/CreateProviderService';
+import FindByIdProviderService from '../../../../../modules/providers/services/FindByIdProviderService';
+import IndexAndSearchProviderService from '../../../../../modules/providers/services/IndexAndSearchProviderService';
+import IndexProviderService from '../../../../../modules/providers/services/IndexProviderService';
+import UpdateProviderService from '../../../../../modules/providers/services/UpdateProviderService';
 import { container } from 'tsyringe';
 
 class ProviderController {

@@ -1,4 +1,4 @@
-import AppError from "src/infra/http/errors/AppError";
+import AppError from "../../../infra/http/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { FormPayment } from "../infra/typeorm/entities/FormPayment";
 import IFormPaymentRepository from "../repositories/IFormPaymentRepository";

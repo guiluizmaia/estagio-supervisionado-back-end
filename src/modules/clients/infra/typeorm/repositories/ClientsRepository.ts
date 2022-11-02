@@ -1,4 +1,4 @@
-import IClientsRepository, { ClientsDtos } from "src/modules/clients/repositories/IClientsRepository";
+import IClientsRepository, { ClientsDtos } from "../../../../../modules/clients/repositories/IClientsRepository";
 import { getRepository, ILike, Repository } from "typeorm";
 import { Clients } from "../entities/Clients";
 

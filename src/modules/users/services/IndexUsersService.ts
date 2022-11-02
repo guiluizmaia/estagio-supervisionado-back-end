@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import IUserRepository from '../repositories/IUserRepository';
 import { User } from '../infra/typeorm/entities/User';
-import AppError from 'src/infra/http/errors/AppError';
-import INumeric from 'src/infra/utils/Numerics/INumeric';
+import AppError from '../../../infra/http/errors/AppError';
+import INumeric from '../../../infra/utils/Numerics/INumeric';
 
 interface IRequest {
   email: string;

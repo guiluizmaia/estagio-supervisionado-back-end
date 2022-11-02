@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import IUserRepository, { UserDtos } from '../repositories/IUserRepository';
 import ICryptHash from '../../../infra/utils/CryptHash/ICryptHash';
-import AppError from 'src/infra/http/errors/AppError';
+import AppError from '../../../infra/http/errors/AppError';
 import { User } from '../infra/typeorm/entities/User';
 
 interface IRequest extends UserDtos {

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateFormPaymentService from 'src/modules/sales/services/CreateFormPaymentService';
-import DeleteFormPaymentService from 'src/modules/sales/services/DeleteFormPaymentService';
-import FindByIdFormPaymentService from 'src/modules/sales/services/FindByIdFormPaymentService';
-import IndexFormPaymentService from 'src/modules/sales/services/IndexFormPaymentService';
-import UpdateFormPaymentService from 'src/modules/sales/services/UpdateFormPaymentService';
+import CreateFormPaymentService from '../../../../../modules/sales/services/CreateFormPaymentService';
+import DeleteFormPaymentService from '../../../../../modules/sales/services/DeleteFormPaymentService';
+import FindByIdFormPaymentService from '../../../../../modules/sales/services/FindByIdFormPaymentService';
+import IndexFormPaymentService from '../../../../../modules/sales/services/IndexFormPaymentService';
+import UpdateFormPaymentService from '../../../../../modules/sales/services/UpdateFormPaymentService';
 import { container } from 'tsyringe';
 
 class FormPaymentController {

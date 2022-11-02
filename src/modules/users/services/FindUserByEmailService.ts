@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import IUserRepository from '../repositories/IUserRepository';
-import AppError from 'src/infra/http/errors/AppError';
+import AppError from '../../../infra/http/errors/AppError';
 import { User } from '../infra/typeorm/entities/User';
 
 interface IRequest {

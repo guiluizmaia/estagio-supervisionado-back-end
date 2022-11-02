@@ -1,5 +1,5 @@
-import { Product } from "src/modules/products/infra/typeorm/entities/Product";
-import { User } from "src/modules/users/infra/typeorm/entities/User";
+import { Product } from "../../../../../modules/products/infra/typeorm/entities/Product";
+import { User } from "../../../../../modules/users/infra/typeorm/entities/User";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('providers')

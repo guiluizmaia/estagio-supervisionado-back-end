@@ -1,4 +1,4 @@
-import IPermissionsRepository from "src/modules/users/repositories/IPermissionsRepository";
+import IPermissionsRepository from "../../../../../modules/users/repositories/IPermissionsRepository";
 import { getRepository, Repository } from "typeorm";
 import { Permission } from "../entities/Permission";
 

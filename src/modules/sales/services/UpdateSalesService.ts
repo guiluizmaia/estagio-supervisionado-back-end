@@ -1,5 +1,5 @@
-import AppError from "src/infra/http/errors/AppError";
-import IProductRepository from "src/modules/products/repositories/IProductRepository";
+import AppError from "../../../infra/http/errors/AppError";
+import IProductRepository from "../../../modules/products/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 import { Sales } from "../infra/typeorm/entities/Sales";
 import ISalesRepository from "../repositories/ISalesRepository";

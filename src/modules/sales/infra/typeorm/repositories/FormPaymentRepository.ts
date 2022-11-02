@@ -1,4 +1,4 @@
-import IFormPaymentRepository, { FormPaymentDtos } from "src/modules/sales/repositories/IFormPaymentRepository";
+import IFormPaymentRepository, { FormPaymentDtos } from "../../../../../modules/sales/repositories/IFormPaymentRepository";
 import { getRepository, Repository, ILike } from "typeorm";
 import { FormPayment } from "../entities/FormPayment";
 

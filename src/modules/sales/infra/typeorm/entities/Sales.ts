@@ -1,6 +1,6 @@
-import { Clients } from "src/modules/clients/infra/typeorm/entities/Clients";
-import { Product } from "src/modules/products/infra/typeorm/entities/Product";
-import { User } from "src/modules/users/infra/typeorm/entities/User";
+import { Clients } from "../../../../../modules/clients/infra/typeorm/entities/Clients";
+import { Product } from "../../../../../modules/products/infra/typeorm/entities/Product";
+import { User } from "../../../../../modules/users/infra/typeorm/entities/User";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { FormPayment } from "./FormPayment";
 

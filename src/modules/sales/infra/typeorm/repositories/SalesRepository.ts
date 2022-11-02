@@ -1,4 +1,4 @@
-import ISalesRepository, { SaleDtos, SalesProductsDtos } from "src/modules/sales/repositories/ISalesRepository";
+import ISalesRepository, { SaleDtos, SalesProductsDtos } from "../../../../../modules/sales/repositories/ISalesRepository";
 import { getRepository, Repository } from "typeorm";
 import { ProductsSales } from "../entities/ProductsSales";
 import { Sales } from "../entities/Sales";

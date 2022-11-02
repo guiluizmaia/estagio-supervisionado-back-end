@@ -1,5 +1,5 @@
-import { Addresses } from 'src/modules/commonData/infra/typeorm/entities/Addresses';
-import { Phones } from 'src/modules/commonData/infra/typeorm/entities/Phones';
+import { Addresses } from '../../commonData/infra/typeorm/entities/Addresses';
+import { Phones } from '../../commonData/infra/typeorm/entities/Phones';
 import { Clients } from '../infra/typeorm/entities/Clients';
 
 export interface ClientsDtos {

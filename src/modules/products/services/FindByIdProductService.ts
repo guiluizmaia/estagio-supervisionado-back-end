@@ -1,4 +1,4 @@
-import AppError from "src/infra/http/errors/AppError";
+import AppError from "../../../infra/http/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { Product } from "../infra/typeorm/entities/Product";
 import IProductRepository from "../repositories/IProductRepository";
