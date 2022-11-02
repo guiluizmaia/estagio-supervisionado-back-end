@@ -30,7 +30,7 @@ class InputProductService {
             const productFind = await this.productRepository.findById(product.productId);
             if(productFind){
                 await this.productRepository.createProductInput_Products({
-                    name: product.name,
+                    name: productFind.name,
                     productId: product.productId,
                     productsInputId: productInput.id,
                     qntd: product.qntd,
