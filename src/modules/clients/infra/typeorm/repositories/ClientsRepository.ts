@@ -51,6 +51,12 @@ export class ClientsRepository implements IClientsRepository{
         })
     }
 
+    async searchAll(name: string): Promise<Clients[]> {
+        return this.repository.find({
+            where: [{name: ILike(`%${name}%`), exclude: false}, {cpf: ILike(`%${name}%`), exclude: false}],
+        })
+    }
+
     async delete(id: string): Promise<void> {
         await this.repository.delete(id)
     }

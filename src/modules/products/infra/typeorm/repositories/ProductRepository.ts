@@ -15,6 +15,11 @@ export class ProductRepository implements IProductRepository{
         this.productInput = getRepository(ProductsInput);
         this.productInputRelational = getRepository(ProductsInput_products);
     }
+    async searchAll(name: string): Promise<Product[]> {
+        return this.repository.find({
+            where: {name: ILike(`%${name}%`)},
+        })
+    }
     
     async countProductInput(startDate: Date, endDate: Date): Promise<number> {
         return this.productInput.count({
