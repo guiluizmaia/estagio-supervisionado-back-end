@@ -10,6 +10,7 @@ import InputProductService from '../../../../../modules/products/services/InputP
 import UpdateProductService from '../../../../../modules/products/services/UpdateProductService';
 import { container } from 'tsyringe';
 import IndexAndSearchAllProductService from 'src/modules/products/services/IndexAndSearchAllProductService';
+import IndexAllProductService from 'src/modules/products/services/IndexAllProductService';
 
 class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -58,18 +59,26 @@ class ProductController {
 
     if(isNaN(Number(page))) page = '0'
     
-    if(!search){
-      const products = await container
-        .resolve(IndexProductService)
-        .execute({page: Number(page)});
-
-      return response.status(200).json(products);
-    }
-
     if(all && search){
       const products = await container
       .resolve(IndexAndSearchAllProductService)
       .execute({search: String(search)});
+
+      return response.status(200).json(products);
+    }
+
+    if(all){
+      const products = await container
+      .resolve(IndexAllProductService)
+      .execute();
+
+      return response.status(200).json(products);
+    }
+
+    if(!search){
+      const products = await container
+        .resolve(IndexProductService)
+        .execute({page: Number(page)});
 
       return response.status(200).json(products);
     }

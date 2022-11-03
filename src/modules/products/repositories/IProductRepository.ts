@@ -52,6 +52,8 @@ interface IProductRepository {
   countSearch(name: string): Promise<number>
   search(name: string, skip?: number, take?: number): Promise<Product[]>;
   searchAll(name: string): Promise<Product[]>;
+  indexAll(): Promise<Product[]>
+  report(initialDate: Date, finalDate: Date): Promise<any[]>;
 }
 
 export default IProductRepository;

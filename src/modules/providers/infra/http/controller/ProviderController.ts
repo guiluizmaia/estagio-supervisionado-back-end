@@ -6,6 +6,7 @@ import IndexProviderService from '../../../../../modules/providers/services/Inde
 import UpdateProviderService from '../../../../../modules/providers/services/UpdateProviderService';
 import { container } from 'tsyringe';
 import IndexAndSearchAllProviderService from 'src/modules/providers/services/IndexAndSearchAllProviderService';
+import IndexAllProviderService from 'src/modules/providers/services/IndexAllProviderService';
 
 class ProviderController {
     public async create(request: Request, response: Response): Promise<Response> {
@@ -44,6 +45,22 @@ class ProviderController {
     
         if(isNaN(Number(page))) page = '0'
         
+        if(search && all){
+          const products = await container
+            .resolve(IndexAndSearchAllProviderService)
+            .execute({search: String(search)});
+    
+          return response.status(200).json(products);
+        }
+
+        if(all){
+          const products = await container
+            .resolve(IndexAllProviderService)
+            .execute();
+    
+          return response.status(200).json(products);
+        }
+        
         if(!search){
           const products = await container
             .resolve(IndexProviderService)
@@ -52,14 +69,6 @@ class ProviderController {
           return response.status(200).json(products);
         }
 
-        if(search && all){
-          const products = await container
-            .resolve(IndexAndSearchAllProviderService)
-            .execute({search: String(search)});
-    
-          return response.status(200).json(products);
-        }
-    
         const products = await container
           .resolve(IndexAndSearchProviderService)
           .execute({page: Number(page), search: String(search)});

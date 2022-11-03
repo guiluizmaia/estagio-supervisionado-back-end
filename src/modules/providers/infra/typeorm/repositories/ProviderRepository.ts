@@ -9,6 +9,10 @@ export class ProviderRepository implements IProviderRepository {
         this.repository = getRepository(Provider);
     }
     
+    async indexAll(): Promise<Provider[]> {
+        return this.repository.find()
+    }
+    
     async searchAll(name: string): Promise<Provider[]> {
         return this.repository.find({
             where: {name: ILike(`%${name}%`), exclude: false},

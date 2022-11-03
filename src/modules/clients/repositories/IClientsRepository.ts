@@ -21,6 +21,7 @@ interface IClientsRepository {
   create(client: ClientsDtos): Promise<Clients>;
   save(client: Clients): Promise<Clients>;
   index(skip?: number, take?: number): Promise<Clients[]>;
+  indexAll(): Promise<Clients[]>;
   search(name: string, skip?: number, take?: number): Promise<Clients[]>;
   searchAll(name: string): Promise<Clients[]>
   countSearch(name: string): Promise<number>

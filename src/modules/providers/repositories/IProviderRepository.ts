@@ -14,6 +14,7 @@ interface IProviderRepository {
   findByEmail(email: String): Promise<Provider | undefined>;
   search(name: string, skip?: number | undefined, take?: number | undefined): Promise<Provider[]>;
   searchAll(name: string): Promise<Provider[]>;
+  indexAll(): Promise<Provider[]>;
   findByCnpj(cnpj: String): Promise<Provider | undefined>;
   findById(id: String): Promise<Provider | undefined>;
   create(provider: ProviderDtos): Promise<Provider>;

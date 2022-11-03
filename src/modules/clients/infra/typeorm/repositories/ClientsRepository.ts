@@ -9,6 +9,10 @@ export class ClientsRepository implements IClientsRepository{
         this.repository = getRepository(Clients);
     }
 
+    async indexAll(): Promise<Clients[]> {
+        return this.repository.find();
+    }
+
     async count(): Promise<number> {
         return this.repository.count({where: {exclude: false}});
     }
