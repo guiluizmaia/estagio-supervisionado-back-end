@@ -1,5 +1,5 @@
 import ISalesRepository, { SaleDtos, SalesProductsDtos } from "../../../../../modules/sales/repositories/ISalesRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, Raw } from "typeorm";
 import { ProductsSales } from "../entities/ProductsSales";
 import { Sales } from "../entities/Sales";
 
@@ -11,6 +11,15 @@ export class SalesRepository implements ISalesRepository{
     constructor(){
         this.repository = getRepository(Sales);
         this.repositoryProductSales = getRepository(ProductsSales);
+    }
+    
+    async findInDate(startDate: Date, endDate: Date): Promise<Sales[]> {
+        return this.repository.find({
+            where: {
+                created_at: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+                canceled: false
+            }
+        })
     }
     
     async FindBySaleIdSalesProducts(id: string): Promise<ProductsSales[]> {

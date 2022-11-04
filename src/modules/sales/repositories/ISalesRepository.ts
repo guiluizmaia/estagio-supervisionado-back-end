@@ -19,6 +19,7 @@ export interface SalesProductsDtos{
 
 interface ISalesRepository {
     findById(id: string): Promise<Sales | undefined>;
+    findInDate(startDate: Date, endDate: Date): Promise<Sales[]>;
     findByClientId(id: string): Promise<Sales[]>;
     findByUserId(id: string): Promise<Sales[]>;
     findByPaymentId(id: string): Promise<Sales[]>;
