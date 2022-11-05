@@ -13,7 +13,13 @@ export class ProductsSales {
     @Column()
     name: string;
     @Column()
+    providerId: string;
+    @Column()
+    providerName: string;
+    @Column()
     price: number;
+    @Column()
+    paidPriceForItem: number;
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()

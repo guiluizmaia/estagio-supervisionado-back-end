@@ -16,6 +16,7 @@ export class SalesRepository implements ISalesRepository{
         const productsQuery = await this.repositoryProductSales
             .createQueryBuilder('p')
             .where('p."saleId" in (:...ids)', {ids})
+            .orderBy('p.created_at', 'DESC');
 
         return productsQuery.getMany()
     }
@@ -26,22 +27,30 @@ export class SalesRepository implements ISalesRepository{
             .where('c.canceled = false')
             .andWhere('c."clientsId" in (:...clientsId)', {clientsId})
             .andWhere('c.created_at >= :startDate', {startDate: startDate.toISOString()})
-            .andWhere('c.created_at < :endDate', {endDate: endDate.toISOString()});
+            .andWhere('c.created_at < :endDate', {endDate: endDate.toISOString()})
+            .orderBy('p.created_at', 'DESC');
 
         return clientsQuery.getMany();
     }
     
-    async findInDate(startDate: Date, endDate: Date): Promise<Sales[]> {
+    async findInDate(startDate: Date, endDate: Date, canceled: Boolean): Promise<Sales[]> {
         return this.repository.find({
             where: {
                 created_at: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
-                canceled: false
+            },
+            order: {
+                created_at: 'DESC'
             }
         })
     }
     
     async FindBySaleIdSalesProducts(id: string): Promise<ProductsSales[]> {
-        return this.repositoryProductSales.find({where: {saleId: id}})
+        return this.repositoryProductSales.find({
+            where: {saleId: id}, 
+            order: {
+                created_at: 'DESC'
+            }
+        })
     }
     
     async createSalesProducts(sale: SalesProductsDtos): Promise<ProductsSales> {
@@ -54,15 +63,30 @@ export class SalesRepository implements ISalesRepository{
     }
     
     async findByClientId(id: string): Promise<Sales[]> {
-        return this.repository.find({where: {clientsId: id}});
+        return this.repository.find({
+            where: {clientsId: id}, 
+            order: {
+                created_at: 'DESC'
+            }
+        });
     }
     
     async findByUserId(id: string): Promise<Sales[]> {
-        return this.repository.find({where: {usersId: id}});
+        return this.repository.find({
+            where: {usersId: id},
+            order: {
+                created_at: 'DESC'
+            }
+        });
     }
     
     async findByPaymentId(id: string): Promise<Sales[]> {
-        return this.repository.find({where: {formPaymentId: id}});
+        return this.repository.find({
+            where: {formPaymentId: id}, 
+            order: {
+                created_at: 'DESC'
+            }
+        });
     }
     
     async create(sale: SaleDtos): Promise<Sales> {
@@ -77,7 +101,10 @@ export class SalesRepository implements ISalesRepository{
     async index(skip: number = 0, take: number = 0): Promise<Sales[]> {
         return this.repository.find({
             skip,
-            take,
+            take, 
+            order: {
+                created_at: 'DESC'
+            }
         })
     }
     

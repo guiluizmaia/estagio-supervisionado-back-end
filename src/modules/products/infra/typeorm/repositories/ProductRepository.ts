@@ -43,6 +43,9 @@ export class ProductRepository implements IProductRepository{
             take,
             where: {
                 date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} < '${endDate.toISOString()}'`),
+            },
+            order: {
+                date: 'DESC'
             }
         })
     }

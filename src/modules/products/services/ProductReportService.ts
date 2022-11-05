@@ -23,7 +23,7 @@ class ProductReportService {
       ) {}
 
     public async execute({startDate, finalDate}: IRequest): Promise<any>{
-        const sales = await this.salesRepository.findInDate(startDate, finalDate)
+        const sales = await this.salesRepository.findInDate(startDate, finalDate, false)
 
         const salesIds = sales.map(sale => {
             return sale.id

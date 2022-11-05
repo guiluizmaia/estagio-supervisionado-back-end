@@ -59,6 +59,9 @@ class CreateSalesService {
                     qntd: productSale ? productSale.qntd : 0,
                     name: productFind.name,
                     price: productFind.salePrice,
+                    paidPriceForItem: productFind.paidPrice,
+                    providerId: productFind.providerId,
+                    providerName: productFind.provider.name
                 })
             })
         )

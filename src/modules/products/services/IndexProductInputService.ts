@@ -51,10 +51,15 @@ class IndexProductInputService {
         )
 
         return {
-          result,
+          result: result.sort(this.compare),
           lastPage,
           page
         }
+    }
+
+    private compare(a: Result,b: Result) {
+      if(a.date < b.date) return 1
+      return -1
     }
 
 }

@@ -15,11 +15,14 @@ export interface SalesProductsDtos{
     qntd: number;
     name: string;
     price: number;
+    paidPriceForItem: number;
+    providerId: string;
+    providerName: string;
 }
 
 interface ISalesRepository {
     findById(id: string): Promise<Sales | undefined>;
-    findInDate(startDate: Date, endDate: Date): Promise<Sales[]>;
+    findInDate(startDate: Date, endDate: Date, canceled: boolean): Promise<Sales[]>;
     findByClientId(id: string): Promise<Sales[]>;
     findByUserId(id: string): Promise<Sales[]>;
     findByPaymentId(id: string): Promise<Sales[]>;
