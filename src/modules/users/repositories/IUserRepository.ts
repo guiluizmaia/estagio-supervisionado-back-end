@@ -9,6 +9,7 @@ export interface UserDtos {
 
 interface IUserRepository {
   findByEmail(email: String): Promise<User | undefined>;
+  findInDate(startDate: Date, endDate: Date): Promise<User[]>;
   findById(id: String): Promise<User | undefined>;
   create(user: UserDtos): Promise<User>;
   save(user: User): Promise<User>;

@@ -1,28 +1,28 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import ProductReportService from 'src/modules/products/services/ProductReportService';
+import UsersReportService from 'src/modules/users/services/UsersReportService';
 
-class ProductReportController {
+class UserReportController {
   public async get(request: Request, response: Response): Promise<Response> {
-    const { startdate, enddate } = request.query;
+    console.log('entrou')
+    const { initialDate, finalDate } = request.params;
 
     let startDate;
     let endDate;
-    if(!startdate){ 
+    if(!initialDate){ 
       startDate = new Date('2021-07-12')
     } else {
-      startDate = new Date(String(startdate))
+      startDate = new Date(String(initialDate))
     }
 
-    if(!enddate){ 
+    if(!finalDate){ 
       endDate = new Date()
     } else {
-      endDate = new Date(String(enddate))
-      endDate.setDate(endDate.getDate() + 1)
+      endDate = new Date(String(finalDate))
     }
 
     const report = await container
-      .resolve(ProductReportService)
+      .resolve(UsersReportService)
       .execute({finalDate: endDate, startDate: startDate});
 
     return response.status(200).json(report);
@@ -31,4 +31,4 @@ class ProductReportController {
 
 }
 
-export default ProductReportController;
+export default UserReportController;

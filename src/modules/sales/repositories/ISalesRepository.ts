@@ -26,10 +26,12 @@ interface ISalesRepository {
     create(sale: SaleDtos): Promise<Sales>;
     createSalesProducts(sale: SalesProductsDtos): Promise<ProductsSales>;
     FindBySaleIdSalesProducts(id: string): Promise<ProductsSales[]>;
+    FindBySaleIdSSalesProducts(ids: string[]): Promise<ProductsSales[]>;
     save(sale: Sales): Promise<Sales>;
     index(skip?: number, take?: number): Promise<Sales[]>;
     count(): Promise<number>;
     delete(id: string): Promise<void>;
+    salesOfClientsInDatePeriod(clientsId: string[], startDate: Date, endDate: Date): Promise<Sales[]>;
 }
 
 export default ISalesRepository

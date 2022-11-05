@@ -12,6 +12,24 @@ export class SalesRepository implements ISalesRepository{
         this.repository = getRepository(Sales);
         this.repositoryProductSales = getRepository(ProductsSales);
     }
+    async FindBySaleIdSSalesProducts(ids: string[]): Promise<ProductsSales[]> {
+        const productsQuery = await this.repositoryProductSales
+            .createQueryBuilder('p')
+            .where('p."saleId" in (:...ids)', {ids})
+
+        return productsQuery.getMany()
+    }
+
+    async salesOfClientsInDatePeriod(clientsId: string[], startDate: Date, endDate: Date): Promise<Sales[]> {
+        const clientsQuery = await this.repository
+            .createQueryBuilder('c')
+            .where('c.canceled = false')
+            .andWhere('c."clientsId" in (:...clientsId)', {clientsId})
+            .andWhere('c.created_at >= :startDate', {startDate: startDate.toISOString()})
+            .andWhere('c.created_at < :endDate', {endDate: endDate.toISOString()});
+
+        return clientsQuery.getMany();
+    }
     
     async findInDate(startDate: Date, endDate: Date): Promise<Sales[]> {
         return this.repository.find({

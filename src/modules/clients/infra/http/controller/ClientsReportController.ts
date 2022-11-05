@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import ProductReportService from 'src/modules/products/services/ProductReportService';
+import ClientsReportService from 'src/modules/clients/services/ClientsReportService';
 
-class ProductReportController {
+class ClientsReportController {
   public async get(request: Request, response: Response): Promise<Response> {
     const { startdate, enddate } = request.query;
 
@@ -22,7 +22,7 @@ class ProductReportController {
     }
 
     const report = await container
-      .resolve(ProductReportService)
+      .resolve(ClientsReportService)
       .execute({finalDate: endDate, startDate: startDate});
 
     return response.status(200).json(report);
@@ -31,4 +31,4 @@ class ProductReportController {
 
 }
 
-export default ProductReportController;
+export default ClientsReportController;

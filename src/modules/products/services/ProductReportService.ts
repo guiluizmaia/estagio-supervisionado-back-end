@@ -24,14 +24,12 @@ class ProductReportService {
 
     public async execute({startDate, finalDate}: IRequest): Promise<any>{
         const sales = await this.salesRepository.findInDate(startDate, finalDate)
-        let products: any[] = [];
 
-        await Promise.all(
-            sales.map(async sale => {
-                const productsSales = await this.salesRepository.FindBySaleIdSalesProducts(sale.id);
-                products = [...productsSales, ...products]
-            })
-        )
+        const salesIds = sales.map(sale => {
+            return sale.id
+        })
+
+        const products = await this.salesRepository.FindBySaleIdSSalesProducts(salesIds)
 
         const ret: any[] = []
 

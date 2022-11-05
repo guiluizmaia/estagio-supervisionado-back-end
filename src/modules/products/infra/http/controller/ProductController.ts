@@ -118,6 +118,7 @@ class ProductController {
       endDate = new Date()
     } else {
       endDate = new Date(String(enddate))
+      endDate.setDate(endDate.getDate() + 1)
     }
 
     const productsInput = await container

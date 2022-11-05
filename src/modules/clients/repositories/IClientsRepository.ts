@@ -16,6 +16,7 @@ export interface ClientsDtos {
 }
 
 interface IClientsRepository {
+  findInDate(startDate: Date, endDate: Date): Promise<Clients[]>;
   findById(id: String): Promise<Clients | undefined>;
   findByCpf(cpf: String): Promise<Clients | undefined>;
   create(client: ClientsDtos): Promise<Clients>;

@@ -1,4 +1,4 @@
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, Raw } from "typeorm";
 import IUserRepository, { UserDtos } from "../../../repositories/IUserRepository";
 import { User } from "../entities/User";
 
@@ -7,6 +7,14 @@ export class UserRepository implements IUserRepository {
 
     constructor(){
         this.repository = getRepository(User);
+    }
+    
+    async findInDate(startDate: Date, endDate: Date): Promise<User[]> {
+        return this.repository.find({
+            where: {
+                created_at: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+            }
+        })
     }
 
     async count(): Promise<number> {

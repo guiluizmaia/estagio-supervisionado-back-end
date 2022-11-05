@@ -1,5 +1,5 @@
 import IClientsRepository, { ClientsDtos } from "../../../../../modules/clients/repositories/IClientsRepository";
-import { getRepository, ILike, Repository } from "typeorm";
+import { getRepository, ILike, Repository, Raw } from "typeorm";
 import { Clients } from "../entities/Clients";
 
 export class ClientsRepository implements IClientsRepository{
@@ -7,6 +7,14 @@ export class ClientsRepository implements IClientsRepository{
 
     constructor(){
         this.repository = getRepository(Clients);
+    }
+    
+    async findInDate(startDate: Date, endDate: Date): Promise<Clients[]> {
+        return this.repository.find({
+            where: {
+                created_at: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} < '${endDate.toISOString()}'`),
+            }
+        })
     }
 
     async indexAll(): Promise<Clients[]> {

@@ -31,7 +31,7 @@ export class ProductRepository implements IProductRepository{
     async countProductInput(startDate: Date, endDate: Date): Promise<number> {
         return this.productInput.count({
             where: {
-                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} < '${endDate.toISOString()}'`),
             }
         }
         );
@@ -42,7 +42,7 @@ export class ProductRepository implements IProductRepository{
             skip,
             take,
             where: {
-                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+                date: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} < '${endDate.toISOString()}'`),
             }
         })
     }
