@@ -20,7 +20,6 @@ class UsersReportService {
   public async execute({startDate, finalDate}: IRequest): Promise<any> {
     const users = await this.userRepository.findInDate(startDate, finalDate);
 
-    console.log(users);
     
     return users
 

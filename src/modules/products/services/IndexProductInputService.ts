@@ -65,3 +65,5 @@ class IndexProductInputService {
 }
 
 export default IndexProductInputService;
+
+

@@ -4,7 +4,6 @@ import UsersReportService from 'src/modules/users/services/UsersReportService';
 
 class UserReportController {
   public async get(request: Request, response: Response): Promise<Response> {
-    console.log('entrou')
     const { initialDate, finalDate } = request.params;
 
     let startDate;

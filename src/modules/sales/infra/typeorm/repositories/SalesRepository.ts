@@ -28,7 +28,7 @@ export class SalesRepository implements ISalesRepository{
             .andWhere('c."clientsId" in (:...clientsId)', {clientsId})
             .andWhere('c.created_at >= :startDate', {startDate: startDate.toISOString()})
             .andWhere('c.created_at < :endDate', {endDate: endDate.toISOString()})
-            .orderBy('p.created_at', 'DESC');
+            .orderBy('c.created_at', 'DESC');
 
         return clientsQuery.getMany();
     }
