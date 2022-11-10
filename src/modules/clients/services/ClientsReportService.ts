@@ -1,4 +1,4 @@
-import ISalesRepository from 'src/modules/sales/repositories/ISalesRepository';
+import ISalesRepository from '@/modules/sales/repositories/ISalesRepository';
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../../infra/http/errors/AppError';
 import INumeric from '../../../infra/utils/Numerics/INumeric';
@@ -9,7 +9,6 @@ interface IRequest {
   finalDate: Date;
 }
 
-
 @injectable()
 class ClientsReportService {
   constructor(
@@ -19,8 +18,11 @@ class ClientsReportService {
     private salesRepository: ISalesRepository,
   ) {}
 
-  public async execute({startDate, finalDate}: IRequest): Promise<any[]> {
-    const clients = await this.clientsRepository.findInDate(startDate, finalDate);
+  public async execute({ startDate, finalDate }: IRequest): Promise<any[]> {
+    const clients = await this.clientsRepository.findInDate(
+      startDate,
+      finalDate,
+    );
 
     const ret: any[] = [];
     const clientIds = clients.map(client => {
@@ -33,29 +35,36 @@ class ClientsReportService {
         initDate: client.initDate,
         salesQuantInPeriod: 0,
         lastSaleDateInPeriod: null,
-        valuePayInPeriod: 0
+        valuePayInPeriod: 0,
       });
 
-      return client.id
-    })
-    if(clientIds.length > 0){
-      const sales = await this.salesRepository.salesOfClientsInDatePeriod(clientIds, startDate, finalDate)
+      return client.id;
+    });
+    if (clientIds.length > 0) {
+      const sales = await this.salesRepository.salesOfClientsInDatePeriod(
+        clientIds,
+        startDate,
+        finalDate,
+      );
 
       ret.forEach((retOne, index) => {
-        const salesOfClient = sales.filter(sale => sale.clientsId === retOne.clientId)
+        const salesOfClient = sales.filter(
+          sale => sale.clientsId === retOne.clientId,
+        );
         salesOfClient.forEach(sales => {
-          retOne.salesQuantInPeriod += 1
-          retOne.valuePayInPeriod += Number(sales.amount)
-          
-          if (retOne.lastSaleDateInPeriod === null) retOne.lastSaleDateInPeriod = sales.created_at
+          retOne.salesQuantInPeriod += 1;
+          retOne.valuePayInPeriod += Number(sales.amount);
 
-          if(retOne.lastSaleDateInPeriod < sales.created_at) retOne.lastSaleDateInPeriod = sales.created_at
-        })
-      })
+          if (retOne.lastSaleDateInPeriod === null)
+            retOne.lastSaleDateInPeriod = sales.created_at;
 
+          if (retOne.lastSaleDateInPeriod < sales.created_at)
+            retOne.lastSaleDateInPeriod = sales.created_at;
+        });
+      });
     }
 
-    return ret
+    return ret;
   }
 }
 

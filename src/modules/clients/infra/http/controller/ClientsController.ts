@@ -5,8 +5,8 @@ import IndexAndSearchClientsService from '../../../services/IndexAndSearchClient
 import IndexClientsService from '../../../services/IndexClientsService';
 import UpdateClientService from '../../../services/UpdateClientService';
 import { container } from 'tsyringe';
-import IndexAndSearchAllClientsService from 'src/modules/clients/services/IndexAndSearchAllClientsService';
-import IndexAllClientsService from 'src/modules/clients/services/IndexAllClientsService';
+import IndexAndSearchAllClientsService from '@/modules/clients/services/IndexAndSearchAllClientsService';
+import IndexAllClientsService from '@/modules/clients/services/IndexAllClientsService';
 
 class ClientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -34,45 +34,44 @@ class ClientsController {
   public async index(request: Request, response: Response): Promise<Response> {
     let { page, search, all } = request.query;
 
-    if(isNaN(Number(page))) page = '0'
+    if (isNaN(Number(page))) page = '0';
 
-    if(all && search){
+    if (all && search) {
       const users = await container
-      .resolve(IndexAndSearchAllClientsService)
-      .execute({search: String(search)});
+        .resolve(IndexAndSearchAllClientsService)
+        .execute({ search: String(search) });
 
       return response.status(200).json(users);
     }
 
-    if(all){
-      const users = await container
-      .resolve(IndexAllClientsService)
-      .execute();
+    if (all) {
+      const users = await container.resolve(IndexAllClientsService).execute();
 
       return response.status(200).json(users);
     }
 
-    if(!search){
+    if (!search) {
       const users = await container
         .resolve(IndexClientsService)
-        .execute({page: Number(page)});
+        .execute({ page: Number(page) });
 
       return response.status(200).json(users);
     }
 
     const users = await container
       .resolve(IndexAndSearchClientsService)
-      .execute({page: Number(page), search: String(search)});
+      .execute({ page: Number(page), search: String(search) });
 
     return response.status(200).json(users);
   }
 
-  public async findByCpf(request: Request, response: Response): Promise<Response> {
+  public async findByCpf(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const { cpf } = request.body;
-    
-    const users = await container
-      .resolve(FindByCpfClientsService)
-      .execute(cpf);
+
+    const users = await container.resolve(FindByCpfClientsService).execute(cpf);
 
     return response.status(200).json(users);
   }

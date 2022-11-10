@@ -9,8 +9,8 @@ import IndexProductService from '../../../../../modules/products/services/IndexP
 import InputProductService from '../../../../../modules/products/services/InputProductService';
 import UpdateProductService from '../../../../../modules/products/services/UpdateProductService';
 import { container } from 'tsyringe';
-import IndexAndSearchAllProductService from 'src/modules/products/services/IndexAndSearchAllProductService';
-import IndexAllProductService from 'src/modules/products/services/IndexAllProductService';
+import IndexAndSearchAllProductService from '@/modules/products/services/IndexAndSearchAllProductService';
+import IndexAllProductService from '@/modules/products/services/IndexAllProductService';
 
 class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -19,7 +19,7 @@ class ProductController {
 
     const created = await container
       .resolve(CreateProductService)
-      .execute({...data, userId: id});
+      .execute({ ...data, userId: id });
 
     return response.status(201).json(created);
   }
@@ -27,29 +27,30 @@ class ProductController {
   public async update(request: Request, response: Response): Promise<Response> {
     const data = request.body;
 
-    const product = await container
-      .resolve(UpdateProductService)
-      .execute(data);
+    const product = await container.resolve(UpdateProductService).execute(data);
 
     return response.status(200).json(product);
   }
 
-  public async findById(request: Request, response: Response): Promise<Response> {
-    const {id} = request.params;
+  public async findById(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.params;
 
     const product = await container
       .resolve(FindByIdProductService)
-      .execute({id});
+      .execute({ id });
 
     return response.status(200).json(product);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const {id} = request.params;
+    const { id } = request.params;
 
     const deleted = await container
       .resolve(DeleteProductService)
-      .execute({id});
+      .execute({ id });
 
     return response.status(200).json(deleted);
   }
@@ -57,35 +58,35 @@ class ProductController {
   public async index(request: Request, response: Response): Promise<Response> {
     let { page, search, all } = request.query;
 
-    if(isNaN(Number(page))) page = '0'
-    
-    if(all && search){
+    if (isNaN(Number(page))) page = '0';
+
+    if (all && search) {
       const products = await container
-      .resolve(IndexAndSearchAllProductService)
-      .execute({search: String(search)});
+        .resolve(IndexAndSearchAllProductService)
+        .execute({ search: String(search) });
 
       return response.status(200).json(products);
     }
 
-    if(all){
+    if (all) {
       const products = await container
-      .resolve(IndexAllProductService)
-      .execute();
+        .resolve(IndexAllProductService)
+        .execute();
 
       return response.status(200).json(products);
     }
 
-    if(!search){
+    if (!search) {
       const products = await container
         .resolve(IndexProductService)
-        .execute({page: Number(page)});
+        .execute({ page: Number(page) });
 
       return response.status(200).json(products);
     }
 
     const products = await container
       .resolve(IndexAndSearchProductService)
-      .execute({page: Number(page), search: String(search)});
+      .execute({ page: Number(page), search: String(search) });
 
     return response.status(200).json(products);
   }
@@ -93,51 +94,54 @@ class ProductController {
   public async input(request: Request, response: Response): Promise<Response> {
     const data = request.body;
 
-    const product = await container
-      .resolve(InputProductService)
-      .execute(data);
+    const product = await container.resolve(InputProductService).execute(data);
 
     return response.status(200).json(product);
   }
 
-  public async indexInput(request: Request, response: Response): Promise<Response> {
+  public async indexInput(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     let { page, startdate, enddate } = request.query;
 
     let startDate;
     let endDate;
 
-    if(isNaN(Number(page))) page = '0'
+    if (isNaN(Number(page))) page = '0';
 
-    if(!startdate){ 
-      startDate = new Date('2021-07-12')
+    if (!startdate) {
+      startDate = new Date('2021-07-12');
     } else {
-      startDate = new Date(String(startdate))
+      startDate = new Date(String(startdate));
     }
 
-    if(!enddate){ 
-      endDate = new Date()
+    if (!enddate) {
+      endDate = new Date();
     } else {
-      endDate = new Date(String(enddate))
-      endDate.setDate(endDate.getDate() + 1)
+      endDate = new Date(String(enddate));
+      endDate.setDate(endDate.getDate() + 1);
     }
 
     const productsInput = await container
       .resolve(IndexProductInputService)
-      .execute({page: Number(page), startDate, endDate});
+      .execute({ page: Number(page), startDate, endDate });
 
     return response.status(200).json(productsInput);
   }
 
-  public async findByIdInput(request: Request, response: Response): Promise<Response> {
-    const {id} = request.params;
+  public async findByIdInput(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.params;
 
     const productInput = await container
       .resolve(FindByIdProductInputService)
-      .execute({id});
+      .execute({ id });
 
     return response.status(200).json(productInput);
   }
-
 }
 
 export default ProductController;
