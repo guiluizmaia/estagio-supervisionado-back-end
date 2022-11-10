@@ -6,7 +6,7 @@ import { Product } from '../infra/typeorm/entities/Product';
 import IProductRepository, {
   ProductDtos,
 } from '../repositories/IProductRepository';
-import ISalesRepository from '@/modules/sales/repositories/ISalesRepository';
+import ISalesRepository from 'src/modules/sales/repositories/ISalesRepository';
 
 interface IRequest {
   startDate: Date;

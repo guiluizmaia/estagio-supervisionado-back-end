@@ -1,10 +1,10 @@
 import 'express-async-errors';
-import * as express from 'express';
+import express from 'express';
 import { Express, Request, Response, NextFunction } from 'express'
-import * as http from 'http';
+import http from 'http';
 import { Server } from 'http';
 
-import * as cors from 'cors';
+import cors from 'cors';
 import { errors } from 'celebrate';
 import AppError from './errors/AppError';
 import appRoutes from './routes';

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import SalesReportService from '@/modules/sales/services/SalesReportService';
+import SalesReportService from 'src/modules/sales/services/SalesReportService';
 import { container } from 'tsyringe';
 
 class SalesReportController {

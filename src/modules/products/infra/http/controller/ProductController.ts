@@ -9,8 +9,8 @@ import IndexProductService from '../../../../../modules/products/services/IndexP
 import InputProductService from '../../../../../modules/products/services/InputProductService';
 import UpdateProductService from '../../../../../modules/products/services/UpdateProductService';
 import { container } from 'tsyringe';
-import IndexAndSearchAllProductService from '@/modules/products/services/IndexAndSearchAllProductService';
-import IndexAllProductService from '@/modules/products/services/IndexAllProductService';
+import IndexAndSearchAllProductService from 'src/modules/products/services/IndexAndSearchAllProductService';
+import IndexAllProductService from 'src/modules/products/services/IndexAllProductService';
 
 class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {

@@ -1,7 +1,7 @@
 import IProviderRepository from '../../providers/repositories/IProviderRepository';
 import { inject, injectable } from 'tsyringe';
-import ISalesRepository from '@/modules/sales/repositories/ISalesRepository';
-import IProductRepository from '@/modules/products/repositories/IProductRepository';
+import ISalesRepository from 'src/modules/sales/repositories/ISalesRepository';
+import IProductRepository from 'src/modules/products/repositories/IProductRepository';
 
 interface IRequest {
   startDate: Date;

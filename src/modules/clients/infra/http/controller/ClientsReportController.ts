@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import ClientsReportService from '@/modules/clients/services/ClientsReportService';
+import ClientsReportService from 'src/modules/clients/services/ClientsReportService';
 
 class ClientsReportController {
   public async get(request: Request, response: Response): Promise<Response> {

@@ -1,4 +1,4 @@
-import ISalesRepository from '@/modules/sales/repositories/ISalesRepository';
+import ISalesRepository from 'src/modules/sales/repositories/ISalesRepository';
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../../infra/http/errors/AppError';
 import INumeric from '../../../infra/utils/Numerics/INumeric';

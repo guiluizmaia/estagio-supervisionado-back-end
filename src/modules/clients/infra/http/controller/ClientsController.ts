@@ -5,8 +5,8 @@ import IndexAndSearchClientsService from '../../../services/IndexAndSearchClient
 import IndexClientsService from '../../../services/IndexClientsService';
 import UpdateClientService from '../../../services/UpdateClientService';
 import { container } from 'tsyringe';
-import IndexAndSearchAllClientsService from '@/modules/clients/services/IndexAndSearchAllClientsService';
-import IndexAllClientsService from '@/modules/clients/services/IndexAllClientsService';
+import IndexAndSearchAllClientsService from 'src/modules/clients/services/IndexAndSearchAllClientsService';
+import IndexAllClientsService from 'src/modules/clients/services/IndexAllClientsService';
 
 class ClientsController {
   public async create(request: Request, response: Response): Promise<Response> {

@@ -5,8 +5,8 @@ import IndexAndSearchProviderService from '../../../../../modules/providers/serv
 import IndexProviderService from '../../../../../modules/providers/services/IndexProviderService';
 import UpdateProviderService from '../../../../../modules/providers/services/UpdateProviderService';
 import { container } from 'tsyringe';
-import IndexAndSearchAllProviderService from '@/modules/providers/services/IndexAndSearchAllProviderService';
-import IndexAllProviderService from '@/modules/providers/services/IndexAllProviderService';
+import IndexAndSearchAllProviderService from 'src/modules/providers/services/IndexAndSearchAllProviderService';
+import IndexAllProviderService from 'src/modules/providers/services/IndexAllProviderService';
 
 class ProviderController {
   public async create(request: Request, response: Response): Promise<Response> {
