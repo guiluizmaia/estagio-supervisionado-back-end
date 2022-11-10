@@ -17,15 +17,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: app-back
     ports:
       - 3333:3333
     volumes:
       - .:/home/node/app
     networks:
       - network-estagio
-    depends_on:
-      - postgresql
 
 networks:
   network-estagio:
