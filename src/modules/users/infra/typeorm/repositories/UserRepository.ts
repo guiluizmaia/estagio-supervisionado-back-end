@@ -20,7 +20,11 @@ export class UserRepository implements IUserRepository {
 
     async count(): Promise<number> {
         return this.repository.count(
-            exclude: false
+            {
+                where: {
+                    exclude: false
+                }
+            }
         );
     }
     
