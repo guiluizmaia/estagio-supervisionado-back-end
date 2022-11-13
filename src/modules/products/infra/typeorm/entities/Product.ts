@@ -23,6 +23,8 @@ export class Product {
     @Column()
     name: string;
     @Column()
+    exclude: boolean;
+    @Column()
     description: string;
     @Column()
     paidPrice: number;

@@ -24,7 +24,7 @@ export class ProductRepository implements IProductRepository{
     }
     async searchAll(name: string): Promise<Product[]> {
         return this.repository.find({
-            where: {name: ILike(`%${name}%`)},
+            where: {name: ILike(`%${name}%`), exclude: false},
         })
     }
     
@@ -92,7 +92,7 @@ export class ProductRepository implements IProductRepository{
 
     async search(name: string, skip?: number | undefined, take?: number | undefined): Promise<Product[]> {
         return this.repository.find({
-            where: {name: ILike(`%${name}%`)},
+            where: {name: ILike(`%${name}%`), exclude: false},
             skip,
             take
         })
@@ -119,7 +119,8 @@ export class ProductRepository implements IProductRepository{
     async index(skip: number = 0, take: number = 10): Promise<Product[]> {
         return this.repository.find({
             skip,
-            take
+            take,
+            where: { exclude: false }
         })
     }
 
