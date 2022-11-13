@@ -1,9 +1,9 @@
 import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
 
-export class addColumnInProducts1667614080020 implements MigrationInterface {
+export class addColumnInUsers1667614080021 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.addColumns('products', 
+        await queryRunner.addColumns('users', 
         [                        
             new TableColumn({
                 name: 'exclude',
@@ -15,7 +15,7 @@ export class addColumnInProducts1667614080020 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropColumns('products', ['exclude'])
+        await queryRunner.dropColumns('users', ['exclude'])
     }
 
 }

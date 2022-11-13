@@ -13,12 +13,15 @@ export class UserRepository implements IUserRepository {
         return this.repository.find({
             where: {
                 created_at: Raw(date => `${date} >= '${startDate.toISOString()}' AND ${date} <= '${endDate.toISOString()}'`),
+                exclude: false
             }
         })
     }
 
     async count(): Promise<number> {
-        return this.repository.count();
+        return this.repository.count(
+            exclude: false
+        );
     }
     
     async findById(id: String): Promise<User | undefined> {
@@ -41,7 +44,8 @@ export class UserRepository implements IUserRepository {
     async index(skip: number = 0, take: number = 10): Promise<User[]> {
         return this.repository.find({
             skip,
-            take
+            take,
+            where: {exclude: false}
         })
     }
 

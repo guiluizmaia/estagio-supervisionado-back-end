@@ -16,7 +16,9 @@ export class ProductRepository implements IProductRepository{
         this.productInputRelational = getRepository(ProductsInput_products);
     }
     async indexAll(): Promise<Product[]> {
-        return this.repository.find();
+        return this.repository.find(
+            {where: {exclude: false},}
+        );
     }
     
     report(initialDate: Date, finalDate: Date): Promise<any[]> {

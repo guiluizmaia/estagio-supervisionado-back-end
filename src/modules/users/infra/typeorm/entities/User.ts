@@ -26,6 +26,8 @@ export class User {
     email: string;
     @Column()
     password: string;
+    @Column()
+    exclude: boolean;
     @OneToMany((type) => Provider, user => User)
     providers: Promise<Provider[]>;
     @OneToMany((type) => Product, user => User)

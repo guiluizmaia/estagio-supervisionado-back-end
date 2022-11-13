@@ -29,7 +29,8 @@ class DeleteUserEmailService {
       throw new AppError('User not found!', 404);
 
     if(userDelete.email !== 'admin@admin.com')
-      await this.userRepository.delete(id);
+      userDelete.exclude = true
+      await this.userRepository.save(userDelete);
   }
 }
 
